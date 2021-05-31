@@ -1,0 +1,244 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="css/profile.css" />
+{{/section}}
+
+{{#section 'js'}}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script src="js/profile.js"></script>
+
+{{/section}}
+
+
+<!-- main -->
+<main class="container" style="color: black; margin-top: 70px">
+  <div class="row">
+    <!-- <div class="col-1"></div> -->
+    <div class="col-11">
+      <div class="row container side-bar-left">
+        <!-- trai -->
+        <div class="col-4">
+          <div class="now-navigation-profile">
+            <div class="header-profile">
+              <div class="row align-items-center" style="margin: 15px 0">
+                <div class="col-auto">
+                  <img class="avatar-circle" src="img/user/{{cookie.user_data.userPic}}" alt="Thành" />
+                </div>
+                <div class="col txt-bold font15">{{cookie.user_data.userFName}}</div>
+              </div>
+            </div>
+            <div class="navigation-profile">
+              <a class="item-navigation active" title="Cập nhật tài khoản" href="#">
+                <div class="row">
+                  <div class="col-auto"><i class="fas fa-user"></i></div>
+                  <div class="col">Cập nhật tài khoản</div>
+                  <div class="col-auto">
+                    <i class="icon-arrow-thin right"></i>
+                  </div>
+                </div>
+              </a>
+              <div class="item-navigation">
+                <a title="update_address" class="" href="#">
+                  <div class="row">
+                    <div class="col-auto">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="col">Thông tin đơn hàng</div>
+                    <div class="col-auto">
+                      <i class="icon-arrow-thin right"></i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="item-navigation">
+              <a class="" title="Phương thức thanh toán" href="#">
+                <div class="row">
+                  <div class="col-auto">
+                    <i class="far fa-credit-card"></i>
+                  </div>
+                  <div class="col">Phương thức thanh toán</div>
+                  <div class="col-auto">
+                    <i class="icon-arrow-thin right"></i>
+                  </div>
+                </div>
+              </a>
+              <div class="nav-payment"></div>
+            </div>
+          </div>
+        </div>
+        <!-- phai -->
+        <div class="col-8">
+          <div class="now-detail-profile">
+            <div class="header-user-profile">Thông tin người dùng</div>
+            <div class="content-user-profile">
+              <div class="user-profile-update">
+                <div class="title-user">Tải ảnh đại diện</div>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="user-avatar-image">
+                      <img
+                        src="img/user/{{cookie.user_data.userPic}}"
+                        alt="" id="avatar_user" />
+                    </div>
+                  </div>
+                  <form class="col-9" method="POST" action="/profile/image" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <span>Tải lên từ</span>
+                      <div class="custom-file-image">
+                        <input type="file" id="validatedCustomFile" class="input-custom" name="userPic"
+                          accept="image/*"  hidden=""/><label class="label-custom" for="validatedCustomFile">Chọn</label><span
+                          class="font-italic" style="font-size: 13px">Chấp nhận GIF, JPEG, PNG, BMP với kích thước tối
+                          đa 5.0 MB</span>
+                      </div>
+                    </div>
+                    <button class="btn btn-blue-4" type="submit">
+                      Cập nhật
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <hr />
+              <div class="user-profile-update">
+                <form id="frmUpdateInfo" action="/profile/info" method="POST" >
+                  <div class="title-user">Thay đổi thông tin</div>
+                  <div class="row form-group align-items-center">
+                    <div class="col-3 txt-bold">Tên</div>
+                    <div class="col-4">
+                      <div class="input-group">
+                        <input name="userFName" placeholder="Tên" type="text" class="form-control"
+                          value="{{cookie.user_data.userFName}}" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-group align-items-center">
+                    <div class="col-3 txt-bold">Giới tính</div>
+                    <div class="col-4">
+                      <div class="input-group">
+                        <select name="userGender" class="custom-select">
+                          {{#compare cookie.user_data.userGender 0}}
+                          <option selected="selected" value="0">Nam</option>
+                          <option value="1">Nữ</option>
+                          {{/compare}}
+                          {{#compare cookie.user_data.userGender 1}}
+                          <option value="0">Nam</option>
+                          <option selected="selected" value="1">Nữ</option>
+                          {{/compare}}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-group align-items-center">
+                    <div class="col-3 txt-bold">Email</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input name="userEmail" type="text" class="show-email"value="{{cookie.user_data.userEmail}}"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-group align-items-center mt-4">
+                    <div class="col-3 txt-bold">Số điện thoại</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input name="userPhone" type="text" class="show-email" value="{{cookie.user_data.userPhone}}"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-group align-items-center form-pass mt-4">
+                    <div class="col-3 txt-bold">Mật khẩu</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <span class="show-pass">********</span><button type="button" class="change-pass">
+                          Đổi mật khẩu
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-pass2 hidden">
+                    <div class="form-group verify-pass">
+                      <div class="row align-items-center mar-bottom5">
+                        <div class="col-3 txt-bold">Mật khẩu mới</div>
+                        <div class="col-4">
+                          <div class="input-group validate-pass">
+                            <input id="password" name="userPassword" placeholder="Mật khẩu mới" type="password" class="form-control"
+                              value="" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row align-items-center">
+                      <div class="col-3 txt-bold">
+                        Nhập lại mật khẩu mới
+                      </div>
+                      <div class="col-4">
+                        <div class="input-group validate-pass">
+                          <input id="re_password" name="re_password" placeholder="Nhập lại mật khẩu mới" type="password"
+                            class="form-control" value="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col-3">
+                      <button  type="submit" class="btn btn-blue-4 btn-block luu">
+                        Lưu thay đổi
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <hr />
+              <div class="modal fade" id="updatePrimaryPhoneConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <span class="close" data-dismiss="modal">x</span>
+                    <div class="modal-header txt-center">
+                      Cập nhật số điện thoại
+                    </div>
+                    <div class="modal-body">
+                      Số điện thoại mới sẽ được liên kết với tài khoản của
+                      bạn và tất cả các số điện thoại khác sẽ bị xóa. Vui
+                      lòng nhấn nút Tiếp tục để nhập số điện thoại mà bạn
+                      muốn cập nhật.
+                    </div>
+                    <div class="modal-footer content-center">
+                      <button type="button" class="btn btn-gray" data-dismiss="modal">
+                        Không
+                      </button>
+                      <div>
+                        <button class="btn btn-green" type="button" data-dismiss="modal">
+                          Tiếp tục
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{!--
+              </div>
+              <div class="user-profile-update">
+                <div class="title-user">Quản lý số điện thoại</div>
+                <div class="list-phone">
+                  <div class="list-phone-row">
+                    <div class="row align-items-center">
+                      <div class="col-3 txt-bold">0869245090</div>
+                      <div>
+                        <span class="phone-verified"><i class="fas fa-check-circle txt-green font16"></i>Số điện thoại
+                          đã được xác thực</span>
+                      </div>
+                      <div class="col-7 btn-update-phone-number dt">
+                        <button class="btn btn-blue-4" type="button">
+                          Cập nhật số điện thoại
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> --}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</main>

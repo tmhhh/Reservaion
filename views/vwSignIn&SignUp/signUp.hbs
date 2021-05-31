@@ -1,0 +1,123 @@
+
+
+    <link rel="stylesheet" href="css/signup.css" />
+
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <div class="main">
+      <form action="" class="form" id="form-signUp" method="POST" enctype="multipart/form-data">
+
+        <h1 class="heading">Sign up</h1>
+        <h2 class="des">Create a new account</h2>
+        <div class="spacer"></div>
+        <div class="form-containter row">
+          <div class="col">
+            <div class="form-group">
+          <label for="fullname" class="lb-control">Your name</label>
+          <input
+            type="text"
+            name="userFName"
+            id="fullname"
+            placeholder="input your first name"
+            class="form-input"
+            rules="isRequired"
+          />
+          <span class="error-control"></span>
+        </div>
+        <div class="form-group">
+          <label for="phone" class="lb-control">Your Phone</label>
+          <input
+            type="text"
+            name="userPhone"
+            id="phone"
+            placeholder="input your phone number"
+            class="form-input"
+            rules="isRequired"
+          />
+          <span class="error-control"></span>
+        </div>
+        <div class="form-group">
+          <label for="birth" class="lb-control">Your Birth</label>
+          <input
+            type="text"
+            name="userBirth"
+            id="birth"
+            placeholder="input your birthday"
+            class="form-input"
+            rules="isRequired"
+          />
+          <span class="error-control"></span>
+        </div>
+        <div class="form-group">
+          <label for="email" class="lb-control">Email</label>
+          <input
+            type="text"
+            name="userEmail"
+            id="email"
+            placeholder="input your email"
+            class="form-input"
+            rules="isRequired"
+          />
+          <span class="error-control"></span>
+        </div>
+          </div>
+           
+        <div class="col">      
+          <div class="form-group">
+          <label for="username" class="lb-control">Your Username</label>
+          <input
+            type="text"
+            name="userNameID"
+            id="username"
+            placeholder="input your username"
+            class="form-input"
+            rules="isRequired"
+          />
+          <span class="error-control"></span>
+        </div>
+        <div class="form-group">
+          <label for="userType" class="lb-control">Your role</label>
+          <select name="userType" id="userType" class="form-input">
+            <option value="3">Diner</option>
+            <option value="2">Restaurant manager</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="password" class="lb-control">Password</label>
+          <input
+            type="text"
+            name="userPassword"
+            id="password"
+            placeholder="input your word"
+            class="form-input"
+            rules="isRequired|min:6"
+          />
+          <span class="error-control"></span>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password" class="lb-control">Confirm Password</label>
+          <input
+            type="text"
+            id="confirm-password"
+            placeholder="confirm your password"
+            class="form-input"
+            rules="isRequired|isConfirm:password"
+          />
+          <span class="error-control"></span>
+        </div>
+        <div class="form-group">
+          <p class="mt-4">Pictures <input type="file" name="picture" /> 
+        </div>
+      </div>
+        </div>
+       
+
+        <button type="submit" class="btn-submit">SUBMIT</button>
+      </form>
+    </div>
+    <script src="js/validate.js"></script>
+    <script>
+      new Validator("#form-signUp");
+    </script> 
+  </body>
