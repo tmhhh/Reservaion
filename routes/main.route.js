@@ -9,20 +9,21 @@ const { upload } = require("../controllers/upload.controller");
 const favoriteModel = require("../models/favoriteList.model");
 const middleware = require("../models/middleware");
 const reservationModel = require("../models/reservation.model");
-const e = require("express");
+
+
 
 router.get("/", async function (req, res) {
+
   const listRestaunrant = await restaurantModel.getAll();
   req.session.listRes = listRestaunrant;
-  const { cookies } = req;
-  if ("user_data" in cookies) {
-    const user = req.cookies.user_data;
+  if (req.session.user) {
+    const user = req.session.user;
     var favoriteList = await favoriteModel.getList(user.userID);
     favoriteList = favoriteList.map((e) => e.rid);
     req.session.favoriteList = favoriteList;
   } else req.session.favoriteList = null;
   res.render("homepage", {
-    cookie: req.cookies,
+    // cookie: req.cookie.user_data,
     listRestaunrant: req.session.listRes,
     session: req.session,
   });
@@ -33,12 +34,13 @@ router.use("/profile", require("./user.route"));
 
 //signup
 router.get("/signup", function (req, res) {
-  res.render("vwSignIn&SignUp/signUp");
+  res.render("vwSignIn&SignUp/signUp",{layout:false});
 });
 router.post(
   "/signup",
   upload("user").single("picture"),
   async function (req, res) {
+    //thieu kiem tra usernameid ton tai chua
     const user = { ...req.body, userPic: req.file.filename };
     const result = await userModel.add(user);
     if (result.affectedRows === 1) {
@@ -49,20 +51,14 @@ router.post(
   }
 );
 
-router.get("/login", function (req, res) {
-  res.render("vwSignIn&SignUp/signIn");
-});
-router.post("/login", async function (req, res) {
-  const result = await userModel.login(req.body);
-  if (Object.values(result) != 0) {
-    res.cookie("user_data", result[0]);
-    res.redirect("/");
-  } else {
-    res.send("fail");
-  }
-});
+//login
+router.use("/login", require('./login.route'));
+
+
+//logout
 router.get("/logout", (req, res) => {
-  res.clearCookie("user_data");
+  // res.clearCookie("user_data");
+  req.session.destroy();
   res.redirect("/");
 });
 

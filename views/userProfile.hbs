@@ -22,9 +22,9 @@
             <div class="header-profile">
               <div class="row align-items-center" style="margin: 15px 0">
                 <div class="col-auto">
-                  <img class="avatar-circle" src="img/user/{{cookie.user_data.userPic}}" alt="Thành" />
+                  <img class="avatar-circle" src="img/user/{{cookie.userPic}}" alt="Thành" />
                 </div>
-                <div class="col txt-bold font15">{{cookie.user_data.userFName}}</div>
+                <div class="col txt-bold font15">{{cookie.userFName}}</div>
               </div>
             </div>
             <div class="navigation-profile">
@@ -78,7 +78,7 @@
                   <div class="col-3">
                     <div class="user-avatar-image">
                       <img
-                        src="img/user/{{cookie.user_data.userPic}}"
+                        src="img/user/{{cookie.userPic}}"
                         alt="" id="avatar_user" />
                     </div>
                   </div>
@@ -107,7 +107,7 @@
                     <div class="col-4">
                       <div class="input-group">
                         <input name="userFName" placeholder="Tên" type="text" class="form-control"
-                          value="{{cookie.user_data.userFName}}" />
+                          value="{{cookie.userFName}}" />
                       </div>
                     </div>
                   </div>
@@ -116,11 +116,11 @@
                     <div class="col-4">
                       <div class="input-group">
                         <select name="userGender" class="custom-select">
-                          {{#compare cookie.user_data.userGender 0}}
+                          {{#compare cookie.userGender 0}}
                           <option selected="selected" value="0">Nam</option>
                           <option value="1">Nữ</option>
                           {{/compare}}
-                          {{#compare cookie.user_data.userGender 1}}
+                          {{#compare cookie.userGender 1}}
                           <option value="0">Nam</option>
                           <option selected="selected" value="1">Nữ</option>
                           {{/compare}}
@@ -132,7 +132,7 @@
                     <div class="col-3 txt-bold">Email</div>
                     <div class="col-8">
                       <div class="input-group">
-                        <input name="userEmail" type="text" class="show-email"value="{{cookie.user_data.userEmail}}"/>
+                        <input name="userEmail" type="text" class="show-email"value="{{cookie.userEmail}}"/>
                       </div>
                     </div>
                   </div>
@@ -140,7 +140,7 @@
                     <div class="col-3 txt-bold">Số điện thoại</div>
                     <div class="col-8">
                       <div class="input-group">
-                        <input name="userPhone" type="text" class="show-email" value="{{cookie.user_data.userPhone}}"/>
+                        <input name="userPhone" type="text" class="show-email" value="{{cookie.userPhone}}"/>
                       </div>
                     </div>
                   </div>
