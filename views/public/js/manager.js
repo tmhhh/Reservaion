@@ -7,3 +7,6 @@ document
   .addEventListener("click", function () {
     window.location.replace("/manager/product/edit");
   });
+document.querySelector(".booking_list").addEventListener("click", function () {
+  window.location.replace("/manager/BookingList");
+});

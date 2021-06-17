@@ -5,7 +5,7 @@ module.exports = {
     return db.add(table, entity);
   },
   getAll: function () {
-    const sql="SELECT * FROM vwListUser";
+    const sql = "SELECT * FROM vwListUser";
     return db.getAllUsingView(sql);
   },
   delete: function (id) {
@@ -26,5 +26,10 @@ module.exports = {
   login: function (User) {
     const sql = `SELECT * FROM ${table} WHERE userNameID = ? AND userPassword = ?`;
     return db.getByCondition(sql, [User.userNameID, User.userPassword]);
+  },
+  getById: function (id) {
+    const sql = `SELECT * FROM ${table} WHERE ?`;
+    const userID = { userID: id };
+    return db.getByCondition(sql, userID);
   },
 };

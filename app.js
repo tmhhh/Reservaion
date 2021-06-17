@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const server = require("http").createServer(app);
+
 //view template
 require("./middleware/view.mdw")(app);
 
@@ -13,6 +15,11 @@ require("./middleware/cookie.mdw")(app);
 
 //session
 require("./middleware/session.mdw")(app);
+
+//SOCKET IO
+const io = require("socket.io")(server);
+app.io = io;
+require("./middleware/chatbox")(app);
 
 //File upload
 
@@ -51,6 +58,7 @@ app.use(
 app.use(function (req, res) {
   res.send("error");
 });
-app.listen(PORT, function () {
+
+server.listen(PORT, function () {
   console.log(`Sever is running at http://localhost:${PORT}`);
 });
