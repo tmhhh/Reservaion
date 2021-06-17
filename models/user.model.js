@@ -30,10 +30,9 @@ module.exports = {
   findUser: async (userinfo) => {
     const sql = `SELECT * FROM ${table} WHERE userNameID = ?`;
     const result = await db.getByCondition(sql, userinfo);
-    if (result.length>0)
-      return result[0];
+    if (result.length > 0) return result[0];
     else return null;
-  }
+  },
   getById: function (id) {
     const sql = `SELECT * FROM ${table} WHERE ?`;
     const userID = { userID: id };
