@@ -16,6 +16,10 @@ require("./middleware/cookie.mdw")(app);
 //session
 require("./middleware/session.mdw")(app);
 
+
+//passport
+require('./middleware/passport.mdw').configure(app);
+
 //SOCKET IO
 const io = require("socket.io")(server);
 app.io = io;
@@ -23,17 +27,25 @@ require("./middleware/chatbox")(app);
 
 //File upload
 
+
 ///////////---------///////////////
+app.use((req, res, next) => {
+  console.log("middleware"  + req.user);
+  if (req.isAuthenticated()) {
+    res.locals.user = req.user;
+   }
+  next();
+});
+
 
 app.use("/", require("./routes/main.route"));
 
 app.use(
   "/admin",
   (req, res, next) => {
-    const { cookies } = req;
-    if ("user_data" in cookies) {
-      const user = req.cookies.user_data;
-      if (user.userType == 1) {
+
+    if (req.session.user) {
+      if (req.session.user.userType == 1) {
         next();
       } else res.redirect("/");
     } else res.redirect("/");
@@ -44,10 +56,9 @@ app.use(
 app.use(
   "/manager",
   (req, res, next) => {
-    const { cookies } = req;
-    if ("user_data" in cookies) {
-      const user = req.cookies.user_data;
-      if (user.userType == 2) {
+    // const { cookies } = req;
+    if (req.session.user) {
+      if (req.session.user.userType == 2) {
         next();
       } else res.redirect("/");
     } else res.redirect("/");

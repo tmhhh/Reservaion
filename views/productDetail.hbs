@@ -1,5 +1,6 @@
 {{#section 'css'}}
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
 <link rel="stylesheet" href="css/productDetail.css">
 <link rel="stylesheet" href="css/chatbox.css">
 {{/section}}
@@ -53,18 +54,19 @@
                                 class="fas fa-phone-alt px-2"></i> Gọi để đặt bàn
                             <span>{{Restaurant.resPhone}}</span>
                         </p>
-                         <p class="resDetail__rate" data-toggle="modal" data-target="#Rating"><i class="fas fa-star-half-alt"></i> Đánh giá</p>
+                        <p class="resDetail__rate" data-toggle="modal" data-target="#Rating"><i
+                                class="fas fa-star-half-alt"></i> Đánh giá</p>
                         <p class="resDetail__time"><i class="fa fa-clock"></i> Mở cửa <span>{{Restaurant.resOpen}} -
                                 {{Restaurant.resClose}}</span> </p>
                         <p class="resDetail__price"><i class="fa fa-dollar-sign"></i> Giá trung bình:
                             <span>{{formatNumber Restaurant.resPrice}} VND</span>
                         </p>
                         <p class="resDetail__rating"><i class="fab fa-gratipay"></i> Mức độ hài lòng:
-                            <span >{{#compare Restaurant.rating 0}} 
-                                    Chưa có đánh giá
-                                    {{else}}
-                                        {{Restaurant.rating}}/10⭐(Đã có {{Rating.NumOfReviewers}} người đánh giá)
-                                    {{/compare}}
+                            <span>{{#compare Restaurant.rating 0}}
+                                Chưa có đánh giá
+                                {{else}}
+                                {{Restaurant.rating}}/10⭐(Đã có {{Rating.NumOfReviewers}} người đánh giá)
+                                {{/compare}}
                             </span>
                         </p>
                     </div>
@@ -83,7 +85,7 @@
         <div class="resIntro__content px-3" id="resII">
             <h3>GIỚI THIỆU</h3>
             <p>Nhà hàng Nhật - chuyên các món ăn tươi, ngon đặc trưng của Nhật Bản. Với tiêu chí “Chất lượng gấp đôi giá
-                thành” Sushi KO luôn mang đến quý khách hàng những trải nghiệm tốt nhất. 
+                thành” Sushi KO luôn mang đến quý khách hàng những trải nghiệm tốt nhất.
             </p>
             <div class="row res__container">
                 <div class="col-12 pb-3">
@@ -224,16 +226,19 @@
                         </h3>
                         <div class="row">
                             <div class="col-6">
-                               <div class="form-group">
-                                        <input id="datetimepicker" name="ReserveTime" class="form-control form-input" type="text" rules="isRequired" placeholder="Chọn ngày và giờ đặt" autocomplete="off">
+                                <div class="form-group">
+                                    <input id="datetimepicker" name="ReserveTime" class="form-control form-input"
+                                        type="text" rules="isRequired" placeholder="Chọn ngày và giờ đặt"
+                                        autocomplete="off">
                                     <span class="error-control"></span>
-                                    </div>
-                               
+                                </div>
+
                             </div>
                             <div class="col-6">
-                                 <div class="form-group">
-                                   <input type="number" class="form-control form-input" name="NumOfDiners" id="" rules="isRequired" placeholder="Số người">
-                                   <span class="error-control"></span>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-input" name="NumOfDiners" id=""
+                                        rules="isRequired" placeholder="Số người">
+                                    <span class="error-control"></span>
                                 </div>
 
                             </div>
@@ -242,31 +247,31 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-input" rules="isRequired" {{#if cookie.user_data}}
-                                                                                            value="{{cookie.user_data.userFName}}"
-                                                                                            {{/if}} placeholder="Điền tên của bạn">
-                                                                                            <span class="error-control"></span>
+                                            <input type="text" class="form-control form-input" rules="isRequired" {{#if
+                                                cookie.user_data}} value="{{cookie.user_data.userFName}}" {{/if}}
+                                                placeholder="Điền tên của bạn">
+                                            <span class="error-control"></span>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-input" rules="isRequired" {{#if cookie.user_data}}
-                                                                                            value="{{cookie.user_data.userPhone}}"
-                                                                                            {{/if}} placeholder="Điền số điện thoại của bạn">
-                                                                                            <span class="error-control"></span>
+                                            <input type="text" class="form-control form-input" rules="isRequired" {{#if
+                                                cookie.user_data}} value="{{cookie.user_data.userPhone}}" {{/if}}
+                                                placeholder="Điền số điện thoại của bạn">
+                                            <span class="error-control"></span>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <input type="text" class="form-control form-input" rules="isRequired" {{#if cookie.user_data}}
-                                                                                            value="{{cookie.user_data.userEmail}}"
-                                                                                            {{/if}} placeholder="Điền email của bạn">
-                                                                                            <span class="error-control"></span>
+                                        <input type="text" class="form-control form-input" rules="isRequired" {{#if
+                                            cookie.user_data}} value="{{cookie.user_data.userEmail}}" {{/if}}
+                                            placeholder="Điền email của bạn">
+                                        <span class="error-control"></span>
                                     </div>
                                     <div class="col-12">
-                                        <textarea  id="" cols="30" rows="10" class="form-control my-2"
+                                        <textarea id="" cols="30" rows="10" class="form-control my-2"
                                             placeholder="Ghi chú" name="Note"></textarea>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -284,40 +289,41 @@
         </div>
     </form>
     <form action="/rating" method="post">
-    <div class="modal fade" id="Rating" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="Rating" data-backdrop="static" data-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                     <h5 class="modal-title text-dark" id="staticBackdropLabel">Mức độ hài lòng của bạn (Thang điểm 10)</h5>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="staticBackdropLabel">Mức độ hài lòng của bạn (Thang điểm
+                            10)</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                </div>
-                <div class="modal-body">
-                      <div class="rating">
-                        <span class="rating-btn">😡</span>
-                        <span class="rating-btn">😣</span>
-                        <span class="rating-btn">😔</span>
-                        <span class="rating-btn">🙁</span>
-                        <span class="rating-btn">😐</span>
-                        <span class="rating-btn">🙂</span>
-                        <span class="rating-btn">😊</span>
-                        <span class="rating-btn">😁</span>
-                        <span class="rating-btn">😆</span>
-                        <span class="rating-btn">🤗</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="rating">
+                            <span class="rating-btn">😡</span>
+                            <span class="rating-btn">😣</span>
+                            <span class="rating-btn">😔</span>
+                            <span class="rating-btn">🙁</span>
+                            <span class="rating-btn">😐</span>
+                            <span class="rating-btn">🙂</span>
+                            <span class="rating-btn">😊</span>
+                            <span class="rating-btn">😁</span>
+                            <span class="rating-btn">😆</span>
+                            <span class="rating-btn">🤗</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="rid" value="{{Restaurant.resID}}">
+                        <input type="hidden" name="rating" value="" id="rating-point">
+                        <button class="btn btn-warning">Submit</button>
+
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="rid" value="{{Restaurant.resID}}">
-                     <input type="hidden" name="rating" value="" id="rating-point">
-                    <button  class="btn btn-warning">Submit</button> 
-                        
-                </div>
             </div>
+
         </div>
-      
-    </div>
     </form>
 
     <div id="chat-bot">
@@ -351,10 +357,10 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chatbox.js"></script>
     <script src="/js/productDetail.js"></script>
-     <script src="/js/validate.js"></script>
+    <script src="/js/validate.js"></script>
     <script>
-      new Validator("#form-reservation");
-    </script> 
+        new Validator("#form-reservation");
+    </script>
 </body>
 
 </html>

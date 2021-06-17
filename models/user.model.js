@@ -27,6 +27,13 @@ module.exports = {
     const sql = `SELECT * FROM ${table} WHERE userNameID = ? AND userPassword = ?`;
     return db.getByCondition(sql, [User.userNameID, User.userPassword]);
   },
+  findUser: async (userinfo) => {
+    const sql = `SELECT * FROM ${table} WHERE userNameID = ?`;
+    const result = await db.getByCondition(sql, userinfo);
+    if (result.length>0)
+      return result[0];
+    else return null;
+  }
   getById: function (id) {
     const sql = `SELECT * FROM ${table} WHERE ?`;
     const userID = { userID: id };
