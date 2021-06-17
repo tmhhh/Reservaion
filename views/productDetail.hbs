@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
 <link rel="stylesheet" href="css/productDetail.css">
+<link rel="stylesheet" href="css/chatbox.css">
 {{/section}}
 {{#section 'js'}}
 <script
@@ -180,7 +181,7 @@
 
                         <form method="POST" class="bg-light w-75 mx-auto p-2 mt-3 border replyForm">
                             <div class="d-flex flex-row align-items-start">
-                                <img class="rounded-circle" src="/img/user/{{../cookie.user_data.userPic}}" width="40">
+                                <img class="rounded-circle" src="/img/user/{{../user.userPic}}" width="40">
                                 <textarea name="replyContent" class="form-control ml-1 shadow-none textarea"></textarea>
                             </div>
                             <div class="mt-2 text-right">
@@ -193,7 +194,7 @@
                         {{/each}}
                         <form method="POST" class="bg-light p-2 mt-3 border">
                             <div class="d-flex flex-row align-items-start">
-                                <img class="rounded-circle" src="/img/user/{{cookie.user_data.userPic}}" width="40">
+                                <img class="rounded-circle" src="/img/user/{{user.userPic}}" width="40">
                                 <textarea name="feedbackContent"
                                     class="form-control ml-1 shadow-none textarea"></textarea>
                             </div>
@@ -247,7 +248,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-input" rules="isRequired" {{#if
-                                                cookie.user_data}} value="{{cookie.user_data.userFName}}" {{/if}}
+                                                user}} value="{{user.userFName}}" {{/if}}
                                                 placeholder="Điền tên của bạn">
                                             <span class="error-control"></span>
                                         </div>
@@ -255,14 +256,14 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-input" rules="isRequired" {{#if
-                                                cookie.user_data}} value="{{cookie.user_data.userPhone}}" {{/if}}
+                                                user}} value="{{user.userPhone}}" {{/if}}
                                                 placeholder="Điền số điện thoại của bạn">
                                             <span class="error-control"></span>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <input type="text" class="form-control form-input" rules="isRequired" {{#if
-                                            cookie.user_data}} value="{{cookie.user_data.userEmail}}" {{/if}}
+                                            user}} value="{{user.userEmail}}" {{/if}}
                                             placeholder="Điền email của bạn">
                                         <span class="error-control"></span>
                                     </div>
@@ -324,6 +325,37 @@
 
         </div>
     </form>
+
+    <div id="chat-bot">
+        <div class="messenger br10">
+            <div class="timestamp">04:45 AM</div>
+            <!-- msgs  -->
+            <div class="chatroom">
+               
+            </div>
+            <!-- msgs  -->
+            <div class="type-area">
+            <input type="text" class="typing" placeholder="Type Here...">
+            <span class="send">
+                <i class="fas fa-paper-plane"></i>
+            </span>
+            </div>
+        </div>
+        <div class="icon">
+            <div class="user">
+            <i class="fas fa-utensils"></i>
+            TO: {{Restaurant.resName}} restaurant
+            </div>
+            <i class="fab fa-facebook-messenger"></i>
+        </div>
+    </div>  
+ <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
+<input type="hidden" id="rid" value="{{Restaurant.managerID}}">
+<input type="hidden" id="uid" value="{{#if user}}{{user.userID}}{{else}}customer{{/if}}">
+<input type="hidden" id="type" value="Customer">
+    <script src="/vendor/jquery/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chatbox.js"></script>
     <script src="/js/productDetail.js"></script>
     <script src="/js/validate.js"></script>
     <script>

@@ -5,11 +5,10 @@ const db = require("../utils/db");
 
 router.use("/product", require("./product.route"));
 // router.use("/user", require("./user.route"));
-router.get("/resetRevenues/:id", async (req, res) => {
-  const query = `CALL ResetRevenues(?)`;
-  const rs = await db.getByCondition(query, req.params.id);
-  res.redirect("/manager");
-});
+router.get("/resetRevenues/:id", managerCtrl.resetRevenues);
+router.get("/BookingList", managerCtrl.BookingList);
+router.get("/confirm", managerCtrl.confirmBooking);
+router.get("/cancel", managerCtrl.cancelBooking);
 router.get("/", managerCtrl.index);
 
 module.exports = router;
