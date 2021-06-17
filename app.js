@@ -28,11 +28,7 @@ require("./middleware/chatbox")(app);
 
 ///////////---------///////////////
 app.use((req, res, next) => {
-<<<<<<< HEAD
-  // console.log("middleware"  + req.user);
-=======
   console.log("middleware" + req.user);
->>>>>>> refs/remotes/origin/master
   if (req.isAuthenticated()) {
     res.locals.user = req.user;
   }

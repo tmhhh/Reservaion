@@ -21,7 +21,7 @@ module.exports = {
     res.redirect("/manager");
   },
   BookingList: async function (req, res) {
-    let managerID = req.cookies.user_data.userID;
+    let managerID = req.user.userID;
     const BookingList = await reserveModel.getBookingList(managerID, false);
     req.session.BookingList = BookingList[0];
     res.render("vwAdmin/bookingList", {
