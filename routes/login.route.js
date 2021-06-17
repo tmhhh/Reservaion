@@ -15,6 +15,7 @@ router.get('/private', (req, res) => {
     if (req.isAuthenticated()) {
         res.send('ok');
         console.log(req.user);
+
     }
 })
 
@@ -41,16 +42,20 @@ router.get("/", function (req, res) {
 router.post('/',
     passport.authenticate('local', { failureRedirect: '/login' }),
     (req, res) => {
-        res.redirect('/login');
+        res.redirect('/');
     });
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
         const User = await userController.findUser(username);
+        console.log(User);
         if (User && User.userPassword == password) {
+            console.log('succes');
             return done(null, User.userNameID);
         }
         else {
+            console.log('fa');
+
             return done(null, false);
         }
     }));
@@ -122,7 +127,7 @@ passport.use(new FbStrategy(
 passport.serializeUser((user, done) => {
     console.log("serial " + user);
 
-    done(null, user);
+    done(null, '1');
 });
 
 

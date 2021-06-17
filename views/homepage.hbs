@@ -1,10 +1,13 @@
-<header>
 
-</header>
+
+{{#section 'js'}}
+<script src="js/homepage.js"></script>
+{{/section}}
+
 <section class="tableCarousel">
   <div class="tableCarousel__content">
     <div class="tableCarousel__logo">
-     <img src="img/logo2.png" alt="" style="width:100%;height:100%">
+     <img src="/img/logo2.png" alt="" style="width:100%;height:100%">
     </div>
     <div class="tableCarousel__title">
       <div class="row">
@@ -98,10 +101,10 @@
         Tìm danh mục
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Buffet</a>
-        <a class="dropdown-item" href="#">Món Âu</a>
-        <a class="dropdown-item" href="#">Món Nhật</a>
-        <a class="dropdown-item" href="#">Món Thái</a>
+        <a href="/search/byCate?cate=1" class="res_cate dropdown-item" >Buffet</a>
+        <a href="/search/byCate?cate=2" class="res_cate dropdown-item" >Món Âu</a>
+        <a href="/search/byCate?cate=3" class="res_cate dropdown-item" >Món Nhật</a>
+        <a href="/search/byCate?cate=4" class="res_cate dropdown-item" >Món Thái</a>
       </div>
     </div>
   </div>
@@ -281,4 +284,3 @@
     </div>
   </div>
 </section>
-<script src="js/homepage.js"></script>

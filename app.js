@@ -8,7 +8,7 @@ require("./middleware/view.mdw")(app);
 //configure to static files
 require("./middleware/config.mdw")(app);
 
-//cookie
+//cookie parser
 require("./middleware/cookie.mdw")(app);
 
 //session
@@ -19,7 +19,7 @@ require('./middleware/passport.mdw').configure(app);
 
 ///////////---------///////////////
 app.use((req, res, next) => {
-  console.log("middleware"  + req.user);
+  // console.log("middleware"  + req.user);
   if (req.isAuthenticated()) {
     res.locals.user = req.user;
    }

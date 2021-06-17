@@ -11,7 +11,7 @@ const middleware = require("../models/middleware");
 const reservationModel = require("../models/reservation.model");
 
 
-
+//
 router.get("/", async function (req, res) {
 
   const listRestaunrant = await restaurantModel.getAll();
@@ -28,6 +28,7 @@ router.get("/", async function (req, res) {
     session: req.session,
   });
 });
+
 
 //user profile
 router.use("/profile", require("./user.route"));
@@ -119,15 +120,29 @@ router.post("/resDetail/reply", async function (req, res) {
 //search Restaurant
 
 router.post("/search", async function (req, res) {
-  console.log(req.body.searchInput);
   const result = await restaurantModel.search(req.body.searchInput);
   console.log(result);
   res.render("homepage", {
-    cookie: req.cookies,
-    session: req.session,
     listRestaunrant: result[0]
   });
 });
+
+
+//search Res by cate
+router.get("/search/byCate",(req,res)=>{
+  const cateID =+req.query.cate;
+  var listRestaunrant=[];
+  req.session.listRes.forEach(e => {
+    if(e.resCate === cateID)
+    listRestaunrant.push(e);
+  });
+  res.render('homepage',{
+    listRestaunrant,
+    session: req.session,
+
+  });
+  
+})
 
 //add favorite list
 router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
@@ -175,3 +190,5 @@ router.post("/rating", middleware.isLogined, async function (req, res) {
   res.redirect(`resDetail?id=${req.body.rid}`);
 });
 module.exports = router;
+
+
