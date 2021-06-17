@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", require("./routes/main"));
+app.use("/", require("./routes/admin.route"));
 
 app.use(
   "/admin",
