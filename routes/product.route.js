@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router();
 const productCtrl = require("../controllers/product.controller");
 const restaurantModel = require("../models/restaurant.model");
-const uploadController= require('../controllers/multi.upload.controller');
+const uploadController = require("../controllers/multi.upload.controller");
 
 var type = "admin";
-
-
 
 router.get("/add", (req, res) => {
   res.render("vwAdmin/addProduct", {
@@ -30,23 +28,23 @@ router.get("/edit", async (req, res) => {
   });
 });
 
-
-
-
-
 //upload mutiple images
-router.post("/add",uploadController.multipleUpload,productCtrl.add);
+router.post("/add", uploadController.multipleUpload, productCtrl.add);
 // );
 // ,upload("restaurant").single("resThumbnail")
 // ,
 
-
 router.get("/delete/:id", productCtrl.delete, (req, res) => {
   res.redirect("/" + type + "/product/edit");
 });
-router.post("/edit",uploadController.multipleUpload, productCtrl.edit, (req, res) => {
-  res.redirect("/" + type + "/product/edit");
-});
+router.post(
+  "/edit",
+  uploadController.multipleUpload,
+  productCtrl.edit,
+  (req, res) => {
+    res.redirect("/" + type + "/product/edit");
+  }
+);
 
 // router.post("/details",productCtrl.showResByID,);
 

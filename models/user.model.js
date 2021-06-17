@@ -34,4 +34,9 @@ module.exports = {
       return result[0];
     else return null;
   }
+  getById: function (id) {
+    const sql = `SELECT * FROM ${table} WHERE ?`;
+    const userID = { userID: id };
+    return db.getByCondition(sql, userID);
+  },
 };

@@ -9,9 +9,6 @@ const { upload } = require("../controllers/upload.controller");
 const favoriteModel = require("../models/favoriteList.model");
 const middleware = require("../models/middleware");
 const reservationModel = require("../models/reservation.model");
-
-
-
 router.get("/", async function (req, res) {
 
   const listRestaunrant = await restaurantModel.getAll();
@@ -125,7 +122,7 @@ router.post("/search", async function (req, res) {
   res.render("homepage", {
     cookie: req.cookies,
     session: req.session,
-    listRestaunrant: result[0]
+    listRestaunrant: result[0],
   });
 });
 
@@ -164,8 +161,13 @@ router.post("/booking", middleware.isLogined, async function (req, res) {
     ...req.body,
     uid: req.cookies.user_data.userID,
   };
-  var rs = await reservationModel.add(reservation);
-  rs = await reservationModel.updateRevenues(req.body.rid, date.getMonth() + 1);
+  const rs = await reservationModel.add(reservation);
+  let restaurant = await restaurantModel.getResByID(req.body.rid);
+  let managerID = restaurant[0].managerID;
+  req.app.io.emit(`booking-${managerID}`, {
+    ...reservation,
+    resName: restaurant[0].resName,
+  });
   res.redirect(`resDetail?id=${req.body.rid}`);
 });
 

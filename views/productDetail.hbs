@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
 <link rel="stylesheet" href="css/productDetail.css">
+<link rel="stylesheet" href="css/chatbox.css">
 {{/section}}
 {{#section 'js'}}
 <script
@@ -324,6 +325,37 @@
 
         </div>
     </form>
+
+    <div id="chat-bot">
+        <div class="messenger br10">
+            <div class="timestamp">04:45 AM</div>
+            <!-- msgs  -->
+            <div class="chatroom">
+               
+            </div>
+            <!-- msgs  -->
+            <div class="type-area">
+            <input type="text" class="typing" placeholder="Type Here...">
+            <span class="send">
+                <i class="fas fa-paper-plane"></i>
+            </span>
+            </div>
+        </div>
+        <div class="icon">
+            <div class="user">
+            <i class="fas fa-utensils"></i>
+            TO: {{Restaurant.resName}} restaurant
+            </div>
+            <i class="fab fa-facebook-messenger"></i>
+        </div>
+    </div>  
+ <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
+<input type="hidden" id="rid" value="{{Restaurant.managerID}}">
+<input type="hidden" id="uid" value="{{#if cookie.user_data}}{{cookie.user_data.userID}}{{else}}customer{{/if}}">
+<input type="hidden" id="type" value="Customer">
+    <script src="/vendor/jquery/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chatbox.js"></script>
     <script src="/js/productDetail.js"></script>
     <script src="/js/validate.js"></script>
     <script>
