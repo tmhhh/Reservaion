@@ -10,7 +10,6 @@ const favoriteModel = require("../models/favoriteList.model");
 const middleware = require("../models/middleware");
 const reservationModel = require("../models/reservation.model");
 router.get("/", async function (req, res) {
-
   const listRestaunrant = await restaurantModel.getAll();
   req.session.listRes = listRestaunrant;
   if (req.session.user) {
@@ -31,7 +30,7 @@ router.use("/profile", require("./user.route"));
 
 //signup
 router.get("/signup", function (req, res) {
-  res.render("vwSignIn&SignUp/signUp",{layout:false});
+  res.render("vwSignIn&SignUp/signUp", { layout: false });
 });
 router.post(
   "/signup",
@@ -49,8 +48,7 @@ router.post(
 );
 
 //login
-router.use("/login", require('./login.route'));
-
+router.use("/login", require("./login.route"));
 
 //logout
 router.get("/logout", (req, res) => {
@@ -70,7 +68,7 @@ router.get("/resDetail", async function (req, res) {
   // console.log('------');
   // console.log(restaurant);
   res.render("productDetail", {
-    cookie: req.cookies,
+    // cookie: req.cookies,
     Feedback: feedback,
     Restaurant: restaurant[0],
     rImages,
@@ -85,7 +83,7 @@ router.post("/resDetail", async function (req, res) {
   var date = new Date();
   console.log(date);
   const feedback = {
-    userID: +req.cookies.user_data.userID,
+    userID: +req.user.userID,
     resID: +req.query.id,
     fbContent: req.body.feedbackContent,
     fbDate: date,
@@ -100,7 +98,7 @@ router.post("/resDetail/reply", async function (req, res) {
   if (req.body.replyContent && req.body.replyContent.trim()) {
     var date = new Date();
     const reply = {
-      userID: +req.cookies.user_data.userID,
+      userID: +req.user.userID,
       resID: +req.query.resID,
       fbID: +req.query.fbID,
       repContent: req.body.replyContent,
@@ -120,7 +118,6 @@ router.post("/search", async function (req, res) {
   const result = await restaurantModel.search(req.body.searchInput);
   console.log(result);
   res.render("homepage", {
-    cookie: req.cookies,
     session: req.session,
     listRestaunrant: result[0],
   });
@@ -129,7 +126,7 @@ router.post("/search", async function (req, res) {
 //add favorite list
 router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
   var rid = +req.params.id;
-  var uid = +req.cookies.user_data.userID;
+  var uid = +req.user.userID;
   const favList = req.session.favoriteList;
   if (favList.indexOf(rid) > -1) {
     const result = await favoriteModel.delete([uid, rid]);
@@ -144,11 +141,9 @@ router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
 });
 //favorite list page
 router.get("/favoriteList", middleware.isLogined, async function (req, res) {
-  const favList = await favoriteModel.getListFavorite(
-    req.cookies.user_data.userID
-  );
+  const favList = await favoriteModel.getListFavorite(req.user.userID);
   res.render("favoriteList", {
-    cookie: req.cookies,
+    // cookie: req.cookies,
     session: req.session,
     FavoriteList: favList[0],
   });
@@ -159,7 +154,7 @@ router.post("/booking", middleware.isLogined, async function (req, res) {
   var date = new Date(req.body.ReserveTime);
   const reservation = {
     ...req.body,
-    uid: req.cookies.user_data.userID,
+    uid: req.user.userID,
   };
   const rs = await reservationModel.add(reservation);
   let restaurant = await restaurantModel.getResByID(req.body.rid);

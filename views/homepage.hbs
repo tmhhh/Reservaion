@@ -134,7 +134,7 @@
                             </span>
           <a href="/favorite/{{resID}}" class="favorite-btn mb-0">
             <button type="button" class="btn btn-outline-danger">
-              {{#if ../cookie.user_data}}
+              {{#if ../user}}
                 {{#if ../session.favoriteList}}
                 {{#exist resID ../session.favoriteList}}
                   <i class="fas fa-heart"></i>

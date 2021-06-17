@@ -9,15 +9,13 @@ var type = "admin";
 router.get("/add", (req, res) => {
   res.render("vwAdmin/addProduct", {
     layout: "manager",
-    user: req.cookies.user_data,
+    user: req.user,
   });
 });
 router.get("/edit", async (req, res) => {
   var Restaurants = await restaurantModel.getAll();
-  if (req.cookies.user_data.userType != 1) {
-    Restaurants = await restaurantModel.getAllByManager(
-      req.cookies.user_data.userID
-    );
+  if (req.user.userType != 1) {
+    Restaurants = await restaurantModel.getAllByManager(req.user.userID);
     type = "manager";
   }
   req.session.Restaurants = Restaurants;
