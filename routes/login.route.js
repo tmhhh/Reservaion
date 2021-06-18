@@ -115,7 +115,7 @@ passport.use(
     {
       clientID: "1061366784392713",
       clientSecret: "1518fc9d11dd2986c0d9d35febed8164",
-	   callbackURL: "https://tmh-reservation.herokuapp.com/login/fb/cb"
+	   callbackURL: "https://tmh-reservation.herokuapp.com/login/fb/cb",
       // callbackURL: "http://localhost:3000/login/fb/cb",
       profileFields: ["email", "displayName"],
     },
