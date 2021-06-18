@@ -3,12 +3,44 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
 <link rel="stylesheet" href="css/productDetail.css">
 <link rel="stylesheet" href="css/chatbox.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
 {{/section}}
 {{#section 'js'}}
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script>
     $('#datetimepicker').datetimepicker()</script>
+
+<script>
+    window.onload = () => {
+        var address = document.querySelector('#resAddress').innerHTML;
+        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q=' + address, function (data) {
+            console.log(data[0].lat);
+            var mymap = L.map('mapid').setView([data[0].lat, data[0].lon], 13);
+            L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mflwyuRlq6eeBg2YdOa0', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'your.mapbox.access.token'
+            }).addTo(mymap);
+            var marker = L.marker([data[0].lat, data[0].lon]).addTo(mymap);
+
+        })
+
+
+    }
+
+</script>
+
 {{/section}}
 
 <body>
@@ -46,7 +78,7 @@
                 <div class="col-7">
                     <div class="resDetail__resName">
                         <h3>{{Restaurant.resName}}</h3>
-                        <p>{{Restaurant.resAddress}}</p>
+                        <p id="resAddress">{{Restaurant.resAddress}}</p>
                     </div>
                     <hr>
                     <div class="resDetail__btn">
@@ -105,7 +137,7 @@
         </div>
         <div class="resIntro__map px-3" id="resMap">
             <h3>BẢN ĐỒ VÀ TIỆN ÍCH</h3>
-            <div class="mapouter">
+            {{!-- <div class="mapouter">
                 <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas"
                         src="https://maps.google.com/maps?q=11%20Hoa%20Ph%C6%B0%E1%BB%A3ng,%20P.%202,%20Ph%C3%BA%20Nhu%E1%BA%ADn&t=&z=13&ie=UTF8&iwloc=&output=embed"
                         frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
@@ -127,7 +159,8 @@
                         }
                     </style>
                 </div>
-            </div>
+            </div> --}}
+            <div id="mapid" style="width:100%;height:400px;"></div>
         </div>
     </section>
     <section class="resComment ">
@@ -263,8 +296,7 @@
                                     </div>
                                     <div class="col-12">
                                         <input type="text" class="form-control form-input" rules="isRequired" {{#if
-                                            user}} value="{{user.userEmail}}" {{/if}}
-                                            placeholder="Điền email của bạn">
+                                            user}} value="{{user.userEmail}}" {{/if}} placeholder="Điền email của bạn">
                                         <span class="error-control"></span>
                                     </div>
                                     <div class="col-12">
@@ -331,28 +363,28 @@
             <div class="timestamp">04:45 AM</div>
             <!-- msgs  -->
             <div class="chatroom">
-               
+
             </div>
             <!-- msgs  -->
             <div class="type-area">
-            <input type="text" class="typing" placeholder="Type Here...">
-            <span class="send">
-                <i class="fas fa-paper-plane"></i>
-            </span>
+                <input type="text" class="typing" placeholder="Type Here...">
+                <span class="send">
+                    <i class="fas fa-paper-plane"></i>
+                </span>
             </div>
         </div>
         <div class="icon">
             <div class="user">
-            <i class="fas fa-utensils"></i>
-            TO: {{Restaurant.resName}} restaurant
+                <i class="fas fa-utensils"></i>
+                TO: {{Restaurant.resName}} restaurant
             </div>
             <i class="fab fa-facebook-messenger"></i>
         </div>
-    </div>  
- <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
-<input type="hidden" id="rid" value="{{Restaurant.managerID}}">
-<input type="hidden" id="uid" value="{{#if user}}{{user.userID}}{{else}}customer{{/if}}">
-<input type="hidden" id="type" value="Customer">
+    </div>
+    <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
+    <input type="hidden" id="rid" value="{{Restaurant.managerID}}">
+    <input type="hidden" id="uid" value="{{#if user}}{{user.userID}}{{else}}customer{{/if}}">
+    <input type="hidden" id="type" value="Customer">
     <script src="/vendor/jquery/jquery.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chatbox.js"></script>
