@@ -112,8 +112,8 @@ router.get(
 passport.use(
   new FbStrategy(
     {
-      clientID: "1467145890122598",
-      clientSecret: "9bab58404fc775471a7722860564e725",
+      clientID: "1061366784392713",
+      clientSecret: "1518fc9d11dd2986c0d9d35febed8164",
       callbackURL: "http://localhost:3000/login/fb/cb",
       profileFields: ["email", "displayName"],
     },
