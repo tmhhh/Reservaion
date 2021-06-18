@@ -63,8 +63,8 @@ passport.use(
       clientID:
         "276022586484-2s9ui1rmhqvc8a6csc05nn2vcnva453d.apps.googleusercontent.com",
       clientSecret: "VoKthWq43LJJ6mSd4jTU8pzO",
-      callbackURL: "http://localhost:3000/login/google/cb",
-      // callbackURL: "https://tmh-reservation.herokuapp.com/login"
+      // callbackURL: "http://localhost:3000/login/google/cb",
+      callbackURL: "https://tmh-reservation.herokuapp.com/login/google/cb"
     },
 
     async (accessToken, refreshToken, profile, done) => {
