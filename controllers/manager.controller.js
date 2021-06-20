@@ -21,7 +21,7 @@ module.exports = {
     res.redirect("/manager");
   },
   BookingList: async function (req, res) {
-    let managerID = req.cookies.user_data.userID;
+    let managerID = req.user.userID;
     const BookingList = await reserveModel.getBookingList(managerID, false);
     req.session.BookingList = BookingList[0];
     res.render("vwAdmin/bookingList", {
@@ -37,5 +37,25 @@ module.exports = {
   cancelBooking: async function (req, res) {
     const rs = await reserveModel.cancel(req.query);
     res.redirect("/manager/BookingList");
+  },
+  DesignMenu: function (req, res) {
+    res.render("vwAdmin/designMenuPage", {
+      layout: "manager",
+      session: req.session,
+      // cookie: req.cookies,
+    });
+  },
+  addMenu: async function (req, res) {
+    let resID = req.query.id;
+    const menu = await restaurantModel.getMenu(resID);
+    res.render("vwAdmin/addMenu", {
+      layout: "manager",
+      menuData: menu[0] === undefined ? "" : menu[0].menu,
+      resID: resID,
+    });
+  },
+  saveMenu: async function (req, res) {
+    const rs = await restaurantModel.saveMenu(req.body);
+    res.redirect("/manager/DesignMenu");
   },
 };

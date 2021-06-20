@@ -10,3 +10,7 @@ document
 document.querySelector(".booking_list").addEventListener("click", function () {
   window.location.replace("/manager/BookingList");
 });
+
+document.querySelector(".design_menu").addEventListener("click", function () {
+  window.location.replace("/manager/DesignMenu");
+});

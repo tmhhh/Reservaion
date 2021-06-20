@@ -53,10 +53,10 @@ module.exports = {
     //   `%" OR resName LIKE "%` +
     //   input +
     //   `%" `;
-  const condition={
-    resID:input
-  }
-    const query=`CALL USP_ResSearching('${input}') `;
+    const condition = {
+      resID: input,
+    };
+    const query = `CALL USP_ResSearching('${input}') `;
     console.log(query);
     console.log(input);
     return db.SearchBySP(query);
@@ -71,5 +71,18 @@ module.exports = {
   getRatingByID: function (rid) {
     const query = `SELECT * FROM Rating WHERE rid = ?`;
     return db.getByCondition(query, rid);
+  },
+
+  getMenu: function (resID) {
+    const query = `SELECT menu FROM resMenu WHERE ?`;
+    return db.getByCondition(query, { id: resID });
+  },
+  saveMenu: async function (entity) {
+    const rs = await db.checkExist("resMenu", { id: entity.id });
+    if (rs[0].Count > 0) {
+      return db.update("resMenu", { menu: entity.menu }, { id: entity.id });
+    } else {
+      return db.add("resMenu", entity);
+    }
   },
 };

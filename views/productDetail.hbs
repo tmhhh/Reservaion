@@ -56,6 +56,7 @@
                         </p>
                         <p class="resDetail__rate" data-toggle="modal" data-target="#Rating"><i
                                 class="fas fa-star-half-alt"></i> Đánh giá</p>
+                        <p class="resDetail__menu" data-toggle="modal" data-target="#Menu"><i class="fas fa-hamburger"></i> Xem menu</p>
                         <p class="resDetail__time"><i class="fa fa-clock"></i> Mở cửa <span>{{Restaurant.resOpen}} -
                                 {{Restaurant.resClose}}</span> </p>
                         <p class="resDetail__price"><i class="fa fa-dollar-sign"></i> Giá trung bình:
@@ -325,7 +326,7 @@
 
         </div>
     </form>
-
+    
     <div id="chat-bot">
         <div class="messenger br10">
             <div class="timestamp">04:45 AM</div>
@@ -349,6 +350,7 @@
             <i class="fab fa-facebook-messenger"></i>
         </div>
     </div>  
+     <input type="hidden" id="resID" value="{{Restaurant.resID}}">
  <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
 <input type="hidden" id="rid" value="{{Restaurant.managerID}}">
 <input type="hidden" id="uid" value="{{#if user}}{{user.userID}}{{else}}customer{{/if}}">

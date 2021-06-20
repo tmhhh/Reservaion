@@ -64,6 +64,7 @@ router.get("/resDetail", async function (req, res) {
   const feedback = await feedbackModel.getFeedBackAndUsersByID(req.query.id);
   const reply = await replyFBModel.getReplyAndUsersByID(req.query.id);
   const rating = await restaurantModel.getRatingByID(req.query.id);
+  const menu = await restaurantModel.getMenu(req.query.id);
   // console.log(restaurant[0]);
   // console.log('------');
   // console.log(restaurant);
@@ -74,6 +75,7 @@ router.get("/resDetail", async function (req, res) {
     rImages,
     Reply: reply,
     Rating: rating[0],
+    menuData: menu[0] === undefined ? "" : menu[0].menu,
     layout: "main",
   });
 });
@@ -172,3 +174,13 @@ router.post("/rating", middleware.isLogined, async function (req, res) {
   res.redirect(`resDetail?id=${req.body.rid}`);
 });
 module.exports = router;
+
+//View menu
+router.get("/viewMenu", async (req, res) => {
+  let resID = req.query.id;
+  const menu = await restaurantModel.getMenu(resID);
+  res.render("viewMenu", {
+    layout: "empty",
+    menuData: menu[0] === undefined ? "" : menu[0].menu,
+  });
+});
