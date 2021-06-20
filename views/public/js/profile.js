@@ -49,3 +49,26 @@ frmUpdateInfo.addEventListener("submit", function (e) {
     alert("Repassword is incorrect");
   }
 });
+
+var userInfo= document.getElementById('user-info');
+var userBooking=document.getElementById('user-booking');
+var frmBookingDetail = document.getElementById('user-booking-profile');
+var frmInfoProfile=document.getElementById('user-info-profile');
+frmBookingDetail.style.display="none";
+console.log(userInfo);
+userInfo.addEventListener('click',(e)=>
+{
+  userBooking.style.color="black";
+  // e.target.parentElement.style.color="red";
+  userInfo.style.color="red";
+
+  frmInfoProfile.style.display="block";
+  frmBookingDetail.style.display="none";
+});
+userBooking.addEventListener('click',(e)=>{
+  userInfo.style.color="black";
+  // e.target.parentElement.style.color="red";
+  userBooking.style.color="red";
+  frmInfoProfile.style.display="none";
+  frmBookingDetail.style.display="block";
+});
