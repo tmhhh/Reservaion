@@ -22,13 +22,13 @@
             <div class="header-profile">
               <div class="row align-items-center" style="margin: 15px 0">
                 <div class="col-auto">
-                  <img class="avatar-circle" src="img/user/{{user.userPic}}" alt="Thành" />
+                  <img class="avatar-circle" src="img/user/{{user.userPic}}" alt="" />
                 </div>
                 <div class="col txt-bold font15">{{user.userFName}}</div>
               </div>
             </div>
             <div class="navigation-profile">
-              <a class="item-navigation active" title="Cập nhật tài khoản" href="#">
+              <a class="item-navigation active" title="Cập nhật tài khoản" href="#test">
                 <div class="row">
                   <div class="col-auto"><i class="fas fa-user"></i></div>
                   <div class="col">Cập nhật tài khoản</div>
@@ -236,8 +236,51 @@
               </div> --}}
             </div>
           </div>
+          <div class="now-detail-profile">
+            <div class="header-user-profile">Thông tin đặt bàn</div>
+            <div class="content-user-profile">
+             <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    
+                    <th>Reservation ID</th>
+                    <th>Restaurant</th>
+                    <th>Check in</th>
+                    <th>Number of Diners</th>
+                    <th>Note</th>
+                    <th>Don't sure🤔</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#if this.BookingList}}
+                    {{#each this.BookingList}}
+
+                      <tr>
+                       
+                        <td>{{id}}</td>
+                        <td>{{resName}}</td>
+                        <td>{{ReserveTime}}</td>
+                        <td>{{NumOfDiners}}</td>
+                        <td>{{Note}}</td>
+                        
+                        <td>
+                          <a href="/profile/cancelBooking?id={{id}}&rid={{rid}}" class="btn btn-danger">HỦY</a>
+                        </td>
+                      </tr>
+
+                    {{/each}}
+
+                  {{/if}}
+
+                </tbody>
+              </table>
+               
+            </div>
+          </div>
         </div>
+        
       </div>
+      
     </div>
     <div class="col-1"></div>
   </div>

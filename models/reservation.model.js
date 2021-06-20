@@ -13,11 +13,19 @@ module.exports = {
     const query = `CALL getBookingList(?,?)`;
     return db.getByCondition(query, [managerID, status]);
   },
+  getUserBooking: function (userID, status) {
+    const query = `SELECT * FROM ${table},restaurant WHERE rid=resID AND uid = ? AND status =?`;
+    return db.getByCondition(query, [userID, status]);
+  },
   confirm: function (id) {
     let entity = { status: true };
     return db.update(table, entity, id);
   },
   cancel: function (id) {
     return db.delete(table, id);
+  },
+  getById: function (id) {
+    const query = `SELECT * FROM ${table} WHERE ?`;
+    return db.getByCondition(query, id);
   },
 };

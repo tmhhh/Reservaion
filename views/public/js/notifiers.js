@@ -2,21 +2,25 @@ let managerID = document.getElementById("uid").value;
 const socket = io();
 socket.on(`booking-${managerID}`, function (message) {
   console.log(message);
-  showNotification(message);
+  showNotification(message, newBookingNotify);
 });
-function showNotification(message) {
+socket.on(`cancelBooking-${managerID}`, function (message) {
+  console.log(message);
+  showNotification(message, cancelBookingNotify);
+});
+function showNotification(message, callback) {
   if (Notification.permission === "granted") {
-    notify(message);
+    callback(message);
   } else if (Notification.permission !== "denied") {
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
-        notify(message);
+        callback(message);
       }
     });
   }
 }
 
-function notify(message) {
+function newBookingNotify(message) {
   const notification = new Notification("New booking", {
     body: `You have an order at ${message.resName}:\nCheck in: ${message.ReserveTime}\nNumber of dinners: ${message.NumOfDiners}`,
     icon: "img/logo.png",
@@ -24,5 +28,15 @@ function notify(message) {
   notification.onclick = (e) => {
     window.location.replace("/manager/BookingList");
   };
-  setTimeout(notification.close.bind(notification), 7000);
+}
+
+function cancelBookingNotify(message) {
+  console.log(message);
+  const notification = new Notification("Cancel booking", {
+    body: `A dinner has been canceled at ${message.resName}:\nCheck in: ${message.ReserveTime}\nNumber of dinners: ${message.NumOfDiners}`,
+    icon: "img/logo.png",
+  });
+  notification.onclick = (e) => {
+    window.location.replace("/manager/BookingList");
+  };
 }

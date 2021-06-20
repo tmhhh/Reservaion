@@ -36,23 +36,16 @@ btnChangePass.addEventListener("click", () => {
 //     // txtPass.classList.toggle("hidden");
 //   });
 
-const frmUpdateInfo=document.querySelector("#frmUpdateInfo");
-var check=false;
-frmUpdateInfo.addEventListener("submit",function(e){
-    e.preventDefault();
-    const password =document.querySelector("#password");
-    const re_password =document.querySelector("#re_password");
+const frmUpdateInfo = document.querySelector("#frmUpdateInfo");
+var check = false;
+frmUpdateInfo.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const password = document.querySelector("#password");
+  const re_password = document.querySelector("#re_password");
 
-    if(password.value===re_password.value)
-    {
-      frmUpdateInfo.submit();
-    }
-    else
-    {
-      alert("Repassword is incorrect");
-
-    }
-  
-
-
-})
+  if (password.value === re_password.value) {
+    frmUpdateInfo.submit();
+  } else {
+    alert("Repassword is incorrect");
+  }
+});
