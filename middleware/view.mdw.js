@@ -64,7 +64,7 @@ module.exports = function (app) {
                     return numeral(value).format("0,0");
                 },
                 dateFormat: function (value) {
-                    return dateFormat(value, "yyyy-mm-dd ");
+                    return dateFormat(value, "dS, yyyy, h:MM:ss TT ");
                 },
                 exist: function (elem, list, options) {
                     if (list.indexOf(elem) > -1) {
