@@ -901,9 +901,9 @@ footer .footer__diachi li span {
 }
 .userDropdown i {
   font-size: 20px;
-}
-.userDropdown .searchIcon {
   position: absolute;
-  right: 140px;
-  top: 35px;
+  right: 149px;
+}
+.dropdown-menu{
+  padding-left:15px !important;
 }

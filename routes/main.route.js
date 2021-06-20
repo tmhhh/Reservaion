@@ -7,13 +7,15 @@ const feedbackModel = require("../models/feedback.model");
 const replyFBModel = require("../models/replyFB.model");
 const { upload } = require("../controllers/upload.controller");
 const favoriteModel = require("../models/favoriteList.model");
-const middleware = require("../models/middleware");
+const authenticalMDW = require("../middleware/authenticate.mdw");
 const reservationModel = require("../models/reservation.model");
+
+
 router.get("/", async function (req, res) {
   const listRestaunrant = await restaurantModel.getAll();
   req.session.listRes = listRestaunrant;
-  if (req.session.user) {
-    const user = req.session.user;
+  if (req.user) {
+    const user = req.user;
     var favoriteList = await favoriteModel.getList(user.userID);
     favoriteList = favoriteList.map((e) => e.rid);
     req.session.favoriteList = favoriteList;
@@ -52,7 +54,7 @@ router.post(
 router.use("/login", require("./login.route"));
 
 //logout
-router.get("/logout", (req, res) => {
+router.get("/logout",authenticalMDW.isLogined ,(req, res) => {
   // res.clearCookie("user_data");
   req.session.destroy();
   res.redirect("/");
@@ -80,7 +82,7 @@ router.get("/resDetail", async function (req, res) {
 });
 
 //feedback
-router.post("/resDetail", async function (req, res) {
+router.post("/resDetail",authenticalMDW.isLogined ,async function (req, res) {
   var date = new Date();
   console.log(date);
   const feedback = {
@@ -95,8 +97,9 @@ router.post("/resDetail", async function (req, res) {
 
 //reply
 
-router.post("/resDetail/reply", async function (req, res) {
+router.post("/resDetail/reply",authenticalMDW.isLogined ,async function (req, res) {
   if (req.body.replyContent && req.body.replyContent.trim()) {
+    console.log(req.body);
     var date = new Date();
     const reply = {
       userID: +req.user.userID,
@@ -141,7 +144,7 @@ router.get("/search/byCate",(req,res)=>{
 })
 
 //add favorite list
-router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
+router.get("/favorite/:id", authenticalMDW.isLogined, async function (req, res) {
   var rid = +req.params.id;
   var uid = +req.user.userID;
   const favList = req.session.favoriteList;
@@ -157,7 +160,7 @@ router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
   res.redirect("/");
 });
 //favorite list page
-router.get("/favoriteList", middleware.isLogined, async function (req, res) {
+router.get("/favoriteList", authenticalMDW.isLogined, async function (req, res) {
   const favList = await favoriteModel.getListFavorite(req.user.userID);
   res.render("favoriteList", {
     // cookie: req.cookies,
@@ -167,7 +170,7 @@ router.get("/favoriteList", middleware.isLogined, async function (req, res) {
 });
 
 //Booking
-router.post("/booking", middleware.isLogined, async function (req, res) {
+router.post("/booking", authenticalMDW.isLogined, async function (req, res) {
   var date = new Date(req.body.ReserveTime);
   const reservation = {
     ...req.body,
@@ -184,7 +187,7 @@ router.post("/booking", middleware.isLogined, async function (req, res) {
 });
 
 //Rating
-router.post("/rating", middleware.isLogined, async function (req, res) {
+router.post("/rating", authenticalMDW.isLogined, async function (req, res) {
   const rs = await restaurantModel.rating(req.body.rid, req.body.rating);
   res.redirect(`resDetail?id=${req.body.rid}`);
 });

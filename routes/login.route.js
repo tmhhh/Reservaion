@@ -11,12 +11,12 @@ const userController = require("../controllers/user.controller");
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-router.get("/private", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.send("ok");
-    console.log(req.user);
-  }
-});
+// router.get("/private", (req, res) => {
+//   if (req.isAuthenticated()) {
+//     res.send("ok");
+//     console.log(req.user);
+//   }
+// });
 
 router.get("/", function (req, res) {
   res.render("vwSignIn&SignUp/signIn", { layout: false });
@@ -41,7 +41,7 @@ router.post(
   "/",
   passport.authenticate("local", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect('/');
   }
 );
 

@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const server = require("http").createServer(app);
+const resCategoryModel=require('./models/category.model');
 
 //view template
 require("./middleware/view.mdw")(app);
@@ -27,11 +28,16 @@ require("./middleware/chatbox")(app);
 //File upload
 
 ///////////---------///////////////
-app.use((req, res, next) => {
-  console.log("middleware" + req.user);
+app.use(async (req, res, next) => {
+  // console.log("middleware" + req.user);
+const listCate = await resCategoryModel.getAll();
+res.locals.listCate=listCate;
   if (req.isAuthenticated()) {
     res.locals.user = req.user;
-  }
+      }
+  // else{
+  //   req.session.oldUrl=req.
+  // }
   next();
 });
 

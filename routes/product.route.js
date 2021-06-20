@@ -35,15 +35,12 @@ router.post("/add", uploadController.multipleUpload, productCtrl.add);
 router.get("/delete/:id", productCtrl.delete, (req, res) => {
   res.redirect("/" + type + "/product/edit");
 });
-router.post(
-  "/edit",
-  uploadController.multipleUpload,
-  productCtrl.edit,
+router.post("/edit", uploadController.multipleUpload,productCtrl.edit,
   (req, res) => {
     res.redirect("/" + type + "/product/edit");
   }
 );
-
+// 
 // router.post("/details",productCtrl.showResByID,);
 
 module.exports = router;

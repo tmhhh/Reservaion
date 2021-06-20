@@ -11,6 +11,7 @@ module.exports = {
       resClose: req.body.resClose,
       resPrice: req.body.resPrice,
       managerID: req.user.userID,
+      resCate:req.body.resCate
     };
 
     await restaurantModel.add(Restaurant);
@@ -35,24 +36,27 @@ module.exports = {
       resName: req.body.resName,
       resAddress: req.body.resAdd,
       resPhone: req.body.resPhone,
-      resThumbnail: req.files[0].filename,
       resOpen: req.body.resOpen,
       resClose: req.body.resClose,
       resPrice: req.body.resPrice,
+      resCate:req.body.resCate
     };
-    console.log(Restaurant);
     const id = +Restaurant.resID;
     const result = await restaurantModel.update(Restaurant);
+    if(req.files.length>0)
+    {
+      Restaurant.resThumbnail=req.files[0].filename;
+          //delete image before insert
 
-    //delete image before insert
-    await resImageModel.delete(id);
+      await resImageModel.delete(id);
+          // //insert
 
-    //insert
-    req.files.forEach(async (e) => {
-      resImage = { resID: id, resImage: e.filename };
-      await resImageModel.add(resImage);
-    });
-
+      req.files.forEach(async (e) => {
+        resImage = { resID: id, resImage: e.filename };
+        await resImageModel.add(resImage);
+      });
+    }
+          
     next();
   },
   showResByID: async function (req, res) {},
