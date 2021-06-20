@@ -12,8 +12,8 @@ const reservationModel = require("../models/reservation.model");
 router.get("/", async function (req, res) {
   const listRestaunrant = await restaurantModel.getAll();
   req.session.listRes = listRestaunrant;
-  if (req.session.user) {
-    const user = req.session.user;
+  if (req.user) {
+    const user = req.user;
     var favoriteList = await favoriteModel.getList(user.userID);
     favoriteList = favoriteList.map((e) => e.rid);
     req.session.favoriteList = favoriteList;
@@ -116,12 +116,24 @@ router.post("/resDetail/reply", async function (req, res) {
 //search Restaurant
 
 router.post("/search", async function (req, res) {
-  console.log(req.body.searchInput);
   const result = await restaurantModel.search(req.body.searchInput);
   console.log(result);
   res.render("homepage", {
     session: req.session,
     listRestaunrant: result[0],
+  });
+});
+
+//search Res by cate
+router.get("/search/byCate", (req, res) => {
+  const cateID = +req.query.cate;
+  var listRestaunrant = [];
+  req.session.listRes.forEach((e) => {
+    if (e.resCate === cateID) listRestaunrant.push(e);
+  });
+  res.render("homepage", {
+    listRestaunrant,
+    session: req.session,
   });
 });
 

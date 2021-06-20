@@ -2,7 +2,7 @@ const db = require("../utils/db");
 const table = `restaurant`;
 module.exports = {
   getAll: function () {
-    const sql = `SELECT * FROM vwListRestaurant`;
+    const sql = `SELECT * FROM ${table}`;
     return db.getAllUsingView(sql);
   },
   getAllByManager: function (id) {

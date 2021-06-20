@@ -10,7 +10,7 @@ require("./middleware/view.mdw")(app);
 //configure to static files
 require("./middleware/config.mdw")(app);
 
-//cookie
+//cookie parser
 require("./middleware/cookie.mdw")(app);
 
 //session
