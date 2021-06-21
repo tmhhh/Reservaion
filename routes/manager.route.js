@@ -10,13 +10,14 @@ router.get("/resetRevenues/:id", managerCtrl.resetRevenues);
 router.get("/BookingList", managerCtrl.BookingList);
 router.get("/confirm", managerCtrl.confirmBooking);
 router.get("/cancel", managerCtrl.cancelBooking);
+router.get("/history", managerCtrl.BookingHistory);
 router.get("/DesignMenu", managerCtrl.DesignMenu);
 router.get("/Menu", managerCtrl.addMenu);
 router.post("/Menu", managerCtrl.saveMenu);
 router.get("/", managerCtrl.index);
-router.get("/voucher",voucherCtrl.index);
+router.get("/voucher", voucherCtrl.index);
 
-router.post('/voucher',voucherCtrl.add)
-router.get("/voucher/all",voucherCtrl.getAll);
+router.post("/voucher", voucherCtrl.add);
+router.get("/voucher/all", voucherCtrl.getAll);
 
 module.exports = router;

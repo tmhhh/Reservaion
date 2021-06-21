@@ -2,7 +2,7 @@
   <div class="table-responsive">
     <div class="table-wrapper">
       <div class="table-title bg-dark">
-        <h2> <b>PROCESSING BOOKING LIST </b></h2>
+        <h2> <b>{{TableTitle}} </b></h2>
         <!-- <div class="row">
                             <div class="col-xs-6">
                                 <h2>Manage <b>Employees</b></h2>
@@ -31,7 +31,8 @@
             <th>Check in</th>
             <th>Number of Diners</th>
             <th>Note</th>
-            <th>Confirm</th>
+            <th>Discount</th>
+            {{#if confirm}}<th>Confirm</th>{{/if}}
           </tr>
         </thead>
         <tbody>
@@ -57,7 +58,8 @@
                 <td>{{dateFormat ReserveTime}}</td>
                 <td>{{NumOfDiners}}</td>
                 <td>{{Note}}</td>
-                <td>
+                <td>{{#if vouValue}}<b>{{vouValue}}%</b>{{/if}}</td>
+                {{#if ../confirm}}<td>
                   <a
                     href="/manager/confirm?id={{id}}&rid={{rid}}&time={{ReserveTime}}"
                     class="confirm"
@@ -68,7 +70,7 @@
                     role="button"
                   ><i class="fas fa-window-close" title="Cancel"></i></a>
                 </td>
-              </tr>
+              </tr>{{/if}}
 
             {{/each}}
 

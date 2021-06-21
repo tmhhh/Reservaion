@@ -262,7 +262,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <input id="datetimepicker" name="ReserveTime" class="form-control form-input"
-                                        type="text" rules="isRequired" placeholder="Chọn ngày và giờ đặt"
+                                        type="text" rules="isRequired|isValidDate" placeholder="Chọn ngày và giờ đặt"
                                         autocomplete="off">
                                     <span class="error-control"></span>
                                 </div>
@@ -289,16 +289,18 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-input" rules="isRequired" {{#if
+                                            <input type="text" class="form-control form-input" name="phone" rules="isRequired|isPhone" {{#if
                                                 user}} value="{{user.userPhone}}" {{/if}}
                                                 placeholder="Điền số điện thoại của bạn">
                                             <span class="error-control"></span>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <input type="text" class="form-control form-input" rules="isRequired" {{#if
-                                            user}} value="{{user.userEmail}}" {{/if}} placeholder="Điền email của bạn">
-                                        <span class="error-control"></span>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-input" name="Email" rules="isRequired" {{#if
+                                                user}} value="{{user.userEmail}}" {{/if}} placeholder="Điền email của bạn">
+                                            <span class="error-control"></span>
+                                        </div>
                                     </div>
                                     <div class="col-12">
                                         <textarea id="" cols="30" rows="10" class="form-control my-2"
@@ -308,7 +310,7 @@
                                     <div class="col-12 	">
                                         <a class="btn btn-secondary font-weight-bold">Sử dụng voucher</a>
                                         <select name="vouID">
-                                            <option value="0">Không sử dụng</option>
+                                            <option value="">Không sử dụng</option>
                                             {{#each this.voucher}}
                                             <option value="{{vouID}}">{{vouKey}} (-{{vouValue}}%) </option>
                                             {{/each}}

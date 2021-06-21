@@ -9,11 +9,19 @@ function Validator(form) {
       var email_confirm = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
       return email_confirm.test(value) ? undefined : "Email is wrong";
     },
+    isPhone: (value) => {
+      var phone_confirm = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+      return phone_confirm.test(value) ? undefined : "Invalid phone number";
+    },
 
     min: (min) => {
       return (value) => {
         return value.length >= min ? undefined : min + " character please";
       };
+    },
+    isValidDate: (value) => {
+      value = new Date(value);
+      return value > Date.now() ? undefined : "Invalid Date";
     },
 
     isConfirm: (confirmValue) => {

@@ -27,6 +27,8 @@ module.exports = {
     res.render("vwAdmin/bookingList", {
       layout: "manager",
       BookingList: req.session.BookingList,
+      TableTitle: "PROCESSING BOOKING LIST",
+      confirm: true,
     });
   },
   confirmBooking: async function (req, res) {
@@ -38,6 +40,16 @@ module.exports = {
   cancelBooking: async function (req, res) {
     const rs = await reserveModel.cancel(req.query);
     res.redirect("/manager/BookingList");
+  },
+  BookingHistory: async function (req, res) {
+    let managerID = req.user.userID;
+    const BookingList = await reserveModel.getBookingList(managerID, true);
+    req.session.BookingList = BookingList[0];
+    res.render("vwAdmin/bookingList", {
+      layout: "manager",
+      BookingList: req.session.BookingList,
+      TableTitle: "BOOKING HISTORY",
+    });
   },
   DesignMenu: function (req, res) {
     res.render("vwAdmin/designMenuPage", {

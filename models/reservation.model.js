@@ -14,7 +14,7 @@ module.exports = {
     return db.getByCondition(query, [managerID, status]);
   },
   getUserBooking: function (userID, status) {
-    const query = `SELECT * FROM ${table},restaurant WHERE rid=resID AND uid = ? AND status =?`;
+    const query = `SELECT * FROM ${table} LEFT JOIN voucher ON ${table}.vouID = voucher.vouID LEFT JOIN restaurant ON ${table}.rid = restaurant.resID WHERE uid = ${userID} AND status = ${status}`;
     return db.getByCondition(query, [userID, status]);
   },
   confirm: function (id) {
