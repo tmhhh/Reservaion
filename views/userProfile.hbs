@@ -219,7 +219,7 @@
           <div class="now-detail-profile" id="user-booking-profile">
             <div class="header-user-profile">Thông tin đặt bàn</div>
             <div class="content-user-profile">
-              <table class="table table-striped table-hover">
+              <table class="table table-striped table-hover" >
                 <thead>
                   <tr>
 
@@ -228,6 +228,7 @@
                     <th>Check in</th>
                     <th>Number of Diners</th>
                     <th>Note</th>
+                    <th>Discount 😍</th>
                     <th>Don't sure🤔</th>
                   </tr>
                 </thead>
@@ -242,7 +243,7 @@
                     <td>{{dateFormat ReserveTime}}</td>
                     <td>{{NumOfDiners}}</td>
                     <td>{{Note}}</td>
-
+                    <td>{{#if vouValue}}-------- <b>{{vouValue}} %</b> --------{{/if}}</td>
                     <td>
                       <a href="/profile/cancelBooking?id={{id}}&rid={{rid}}" class="btn btn-danger">HỦY</a>
                     </td>

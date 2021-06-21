@@ -17,6 +17,9 @@ document.querySelector(".voucher-generator").addEventListener("click", () => {
 document.querySelector(".design_menu").addEventListener("click", function () {
   window.location.replace("/manager/DesignMenu");
 });
+document.querySelector(".history").addEventListener("click", function () {
+  window.location.replace("/manager/history");
+});
 
 //voucher
 
