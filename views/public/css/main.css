@@ -81,9 +81,36 @@ body {
 .navbar .navbar-nav .nav-item .nav-link:hover {
   color: #0288d1;
 }
-
+@media screen and (max-width: 576px) {
+  .navbar .loginNav .nav-itemspe{
+    transform: translate(28px, 25px)!important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .navbar{
+    justify-content: space-between;
+  }
+  .navbar .navbar-brand {
+    margin-left: 0 !important;
+  }
+  .navbar .loginNav {
+    margin-right: 0;
+  }
+  .navbar .loginNav .nav-itemspe{
+    transform: translate(129px, 7px);
+  }
+  .navbar .loginNav .nav-itemspe .nav-link{
+    display: flex;
+    align-items: center;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 .tableCarousel {
   display: block;
+  margin-top: 73px;
   background: url("../img/banner.jpg") no-repeat center center;
   background-size: cover;
   height: 400px;
@@ -200,7 +227,49 @@ body {
   background: rgba(0, 0, 0, 0.25);
   z-index: 0;
 }
+@media screen and (max-width: 576px) {
+  .tableCarousel {
+    margin-top: 76px;
+    height: 300px;
+  }
+  .tableCarousel .tableCarousel__content {
+    width: 90%;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__logo {
+    display: none;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__title {
+    font-size: 14px;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__title span {
+    white-space: nowrap;
+    text-align: center;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__search .input-group .form-control {
+    font-size: 16px;
+    padding: 20px 5px;
+  }
+}
 
+@media screen and (max-width: 768px) {
+  .tableCarousel {
+    margin-top: 50px;
+    height: 300px;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__title h3 {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__title span {
+    font-size: 14px;
+  }
+  .tableCarousel .tableCarousel__content .tableCarousel__search .input-group .form-control {
+    font-size: 16px;
+    padding: 20px 5px;
+  }
+}
 .sepcialOffers {
   width: 80%;
   margin: auto;
@@ -447,7 +516,35 @@ body {
   font-size: 12px;
   font-weight: normal;
 }
+.news .news__content .btn-readmore {
+  display: none;
+  margin: auto;
+  color: #000000;
+  font-size: 24px;
+  font-weight: normal;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 5px 20px;
+  border-radius: 50%;
+}
 
+.news .news__content .btn-readmore:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .news__content .news_hidden {
+    display: none;
+    
+  }
+  .news__content .news-show {
+    display: block !important;
+    
+  }
+  .news__content .btn-readmore {
+    display: block !important;
+  }
+}
 .brandPartner {
   width: 80%;
   margin: auto;
@@ -485,7 +582,14 @@ body {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
+@media screen and (max-width: 576px) {
+  .brandPartner {
+    width: 100%;
+  }
+  .brandPartner .img-item {
+    margin: auto;
+  }
+}
 footer {
   padding: 0 0 30px 0;
   margin-top: 150px;
@@ -573,6 +677,20 @@ footer .footer__diachi li span {
   font-weight: normal;
 }
 
+@media screen and (max-width: 576px) {
+  footer .footer__app {
+    text-align: center;
+  }
+  footer .footer__app .list-unstyled {
+    display: inline-block;
+  }
+  footer .footer__diachi {
+    text-align: center;
+  }
+  footer .footer__diachi li:last-child img {
+    width: 100px !important;
+  }
+}
 .resDetail {
   margin-top: 100px;
 }
@@ -587,7 +705,29 @@ footer .footer__diachi li span {
 .resDetail .resDetail__content .row {
   margin: 0;
 }
-
+@media screen and (max-width: 576px) {
+  .resDetail .resDetail__content{
+    width: 90%;
+  }
+  .resDetail .resDetail__content .resDetail__btn .resDetail__call{
+    width: 307px!important;
+    padding: 10px 10px !important;
+  }
+  .resDetail .resDetail__content .resDetail__btn .resDetail__call span{
+    display: inline-block;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 15px;
+  }
+  .resIntro {
+    width: 90%!important;
+  }
+  .resIntro .resIntro__map iframe{
+    height: 250px;
+  }
+}
 .resDetail .resDetail__content .resDetail__slideShow {
   position: relative;
   /* Position the image container (needed to position the left and right arrows) */
