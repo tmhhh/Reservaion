@@ -5,19 +5,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Sign Up</title>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
- <link rel="stylesheet" href="css/signup.css" />
+  <link rel="stylesheet" href="css/signup.css" />
 </head>
 
 <body>
   <div class="main">
 
     <form action="" class="form" id="form-signUp" method="POST" enctype="multipart/form-data">
-            <a href="/" type="submit" class="float-left btn-outline-primary">Back</a>
+      <a href="/" type="submit" class="float-left btn-outline-primary">Back</a>
 
       <h1 class="heading">Sign up</h1>
       <h2 class="des">Create a new account</h2>
@@ -55,7 +55,7 @@
             <label for="username" class="lb-control">Your Username</label>
             <input type="text" name="userNameID" id="username" placeholder="input your username" class="form-input"
               rules="isRequired" />
-            <span class="error-control"></span>
+            <span class="text-danger error-control">{{error}}</span>
           </div>
           <div class="form-group">
             <label for="userType" class="lb-control">Your role</label>
@@ -66,13 +66,13 @@
           </div>
           <div class="form-group">
             <label for="password" class="lb-control">Password</label>
-            <input type="text" name="userPassword" id="password" placeholder="input your word" class="form-input"
+            <input type="password" name="userPassword" id="password" placeholder="input your word" class="form-input"
               rules="isRequired|min:6" />
             <span class="error-control"></span>
           </div>
           <div class="form-group">
             <label for="confirm-password" class="lb-control">Confirm Password</label>
-            <input type="text" id="confirm-password" placeholder="confirm your password" class="form-input"
+            <input type="password" id="confirm-password" placeholder="confirm your password" class="form-input"
               rules="isRequired|isConfirm:password" />
             <span class="error-control"></span>
           </div>
@@ -93,5 +93,3 @@
 </body>
 
 </html>
-
-

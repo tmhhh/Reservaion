@@ -172,7 +172,7 @@
                         {{#each this.Feedback}}
                         <div class="bg-white p-2">
                             <div class="d-flex flex-row user-info"><img class="rounded-circle"
-                                    src="/img/user/{{userPic}}" width="40">
+                                    src="/img/user/{{userPic}}" width="40" height="40">
                                 <div class="d-flex flex-column justify-content-start ml-2"><span
                                         class="d-block font-weight-bold name">{{userFName}}</span><span
                                         class="date text-black-50">{{dateFormat fbDate}}</span></div>
@@ -185,12 +185,12 @@
                         </div>
                         <div class="bg-white mb-4">
                             <div class="d-flex flex-row fs-12">
-                                <div class="like p-2 cursor"><i class="fa fa-thumbs-up"></i><span
-                                        class="ml-1">Like</span></div>
-                                <div class="like p-2 cursor" onclick="showReplyForm({{@index}})"><i
-                                        class="fa fa-comment" aria-hidden="true"></i><span class="ml-1">Reply</span>
+                                <div style="color:blue"class="like p-2 cursor"><i class="fa fa-thumbs-up"></i><span
+                                        class="ml-1" >Like</span></div>
+                                <div style="color:rgb(158, 158, 22)" class="like p-2 cursor" onclick="showReplyForm({{@index}})"><i
+                                        class="fa fa-comment" aria-hidden="true"></i><span class="ml-1" >Reply</span>
                                 </div>
-                                <div class="like p-2 cursor"><i class="fa fa-share"></i>
+                                <div style="color:rgb(99, 201, 99)" class="like p-2 cursor"><i class="fa fa-share"></i>
                                     <span class="ml-1">Share</span>
                                 </div>
                             </div>
@@ -226,9 +226,9 @@
                             </div>
                         </form>
                         {{/each}}
-                        <form method="POST" class="bg-light p-2 mt-3 border">
+                        <form method="POST" class="bg-light p-2 mt-3 border feedbackForm">
                             <div class="d-flex flex-row align-items-start">
-                                <img class="rounded-circle" src="/img/user/{{user.userPic}}" width="40">
+                                <img class="rounded-circle" src="/img/user/{{user.userPic}}" width="40" height="40">
                                 <textarea name="feedbackContent"
                                     class="form-control ml-1 shadow-none textarea"></textarea>
                             </div>

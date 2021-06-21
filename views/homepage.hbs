@@ -33,23 +33,25 @@
   </div>
 
 </section>
-<section class="sepcialOffers mb-5" id="uuDai">
+<section class="sepcialOffers mb-5 mt-4" id="uuDai">
   <h3 class="sepcialOffers__title">ƯU ĐÃI ĐẶC BIỆT</h3>
   <div class="specialOffers__content">
     <div class="owl-carousel owl-theme owl-specialOffer">
-      <a href="">
+      {{#each this.listResHaveVoucher}}
+          <a href="">
         <div class="card text-white">
-          <img class="card-img-top" src="/img/res1.jpg" alt="" />
+          <img height="250"class="card-img-top" src="/img/restaurant/{{resThumbnail}}" alt="" />
           <div class="card-body">
-            <h4 class="card-title pb-2 border-bottom">Giảm 20% tổng hóa đơn khi
+            <h4 class="card-title pb-2 border-bottom">Giảm {{vouValue}}% tổng hóa đơn khi
               đặt chỗ</h4>
-            <p class="card-text">Switch Restaurent</p>
-            <p class="card-text">Tầng 2, 68 Ngô Đức Kế, P Bến Thành, Quận 1,
-              Tp.HCM</p>
+            <p class="card-text">{{resName}}</p>
+            <p class="card-text">{{resAddress}}</p>
           </div>
         </div>
       </a>
-      <a href="">
+      {{/each}}
+     
+      {{!-- <a href="">
         <div class="card text-white ">
           <img class="card-img-top" src="/img/res2.jpg" alt="" />
           <div class="card-body">
@@ -72,8 +74,8 @@
               Tp.HCM</p>
           </div>
         </div>
-      </a>
-      <a href="">
+      </a> --}}
+      {{!-- <a href="">
         <div class="card text-white">
           <img class="card-img-top" src="img/res1.jpg" alt="" />
           <div class="card-body">
@@ -84,7 +86,7 @@
               Tp.HCM</p>
           </div>
         </div>
-      </a>
+      </a> --}}
     </div>
   </div>
 </section>

@@ -13,6 +13,8 @@ const voucherModel = require("../models/voucher.model");
 
 router.get("/", async function (req, res) {
   const listRestaunrant = await restaurantModel.getAll();
+  const listResHaveVoucher =await voucherModel.getListResHaveVoucher();
+  console.log(listResHaveVoucher);
   req.session.listRes = listRestaunrant;
   if (req.user) {
     const user = req.user;
@@ -24,6 +26,7 @@ router.get("/", async function (req, res) {
     // cookie: req.cookie.user_data,
     listRestaunrant: req.session.listRes,
     session: req.session,
+    listResHaveVoucher
   });
 });
 
@@ -38,8 +41,20 @@ router.post(
   "/signup",
   upload("user").single("picture"),
   async function (req, res) {
-    //thieu kiem tra usernameid ton tai chua
-    const user = { ...req.body, userPic: req.file.filename };
+
+    const checkExist=await userModel.findUser(req.body.userNameID);
+    var user= { ...req.body};;
+    if(checkExist){
+      res.render("vwSignIn&SignUp/signUp", { 
+        error:"Username is not available",
+        layout: false });
+        return;
+    }
+    if(req.file)
+    {
+     user.userPic=req.file.filename ;
+    }
+   
     const result = await userModel.add(user);
     if (result.affectedRows === 1) {
       res.redirect("/login");

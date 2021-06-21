@@ -13,4 +13,8 @@ module.exports = {
     const query = `SELECT * FROM ${table} WHERE resID=?`;
     return db.getByCondition(query, resID);
   },
+  getListResHaveVoucher:function(){
+    const query=`SELECT * FROM ${table} v,restaurant r where v.resID=r.resID`;
+    return db.getByCondition(query,'');
+  }
 }
