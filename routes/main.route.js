@@ -9,7 +9,7 @@ const { upload } = require("../controllers/upload.controller");
 const favoriteModel = require("../models/favoriteList.model");
 const authenticalMDW = require("../middleware/authenticate.mdw");
 const reservationModel = require("../models/reservation.model");
-const voucherModel=require('../models/voucher.model');
+const voucherModel = require("../models/voucher.model");
 
 router.get("/", async function (req, res) {
   const listRestaunrant = await restaurantModel.getAll();
@@ -53,7 +53,7 @@ router.post(
 router.use("/login", require("./login.route"));
 
 //logout
-router.get("/logout",authenticalMDW.isLogined ,(req, res) => {
+router.get("/logout", authenticalMDW.isLogined, (req, res) => {
   // res.clearCookie("user_data");
   req.session.destroy();
   res.redirect("/");
@@ -67,13 +67,12 @@ router.get("/resDetail", async function (req, res) {
   const reply = await replyFBModel.getReplyAndUsersByID(req.query.id);
   const rating = await restaurantModel.getRatingByID(req.query.id);
 
-  const voucher=await voucherModel.getVouByResID(req.query.id);
+  const voucher = await voucherModel.getVouByResID(req.query.id);
   // console.log(restaurant[0]);
   // console.log('------');
   // console.log(restaurant);
 
   const menu = await restaurantModel.getMenu(req.query.id);
-
 
   res.render("productDetail", {
     Feedback: feedback,
@@ -90,7 +89,7 @@ router.get("/resDetail", async function (req, res) {
 });
 
 //feedback
-router.post("/resDetail",authenticalMDW.isLogined ,async function (req, res) {
+router.post("/resDetail", authenticalMDW.isLogined, async function (req, res) {
   var date = new Date();
   console.log(date);
   const feedback = {
@@ -105,23 +104,27 @@ router.post("/resDetail",authenticalMDW.isLogined ,async function (req, res) {
 
 //reply
 
-router.post("/resDetail/reply",authenticalMDW.isLogined ,async function (req, res) {
-  if (req.body.replyContent && req.body.replyContent.trim()) {
-    console.log(req.body);
-    var date = new Date();
-    const reply = {
-      userID: +req.user.userID,
-      resID: +req.query.resID,
-      fbID: +req.query.fbID,
-      repContent: req.body.replyContent,
-      repDate: date,
-    };
-    const result = await replyFBModel.add(reply);
-    res.redirect(`/resDetail?id=${req.query.resID}`);
-  } else {
-    res.send("error");
+router.post(
+  "/resDetail/reply",
+  authenticalMDW.isLogined,
+  async function (req, res) {
+    if (req.body.replyContent && req.body.replyContent.trim()) {
+      console.log(req.body);
+      var date = new Date();
+      const reply = {
+        userID: +req.user.userID,
+        resID: +req.query.resID,
+        fbID: +req.query.fbID,
+        repContent: req.body.replyContent,
+        repDate: date,
+      };
+      const result = await replyFBModel.add(reply);
+      res.redirect(`/resDetail?id=${req.query.resID}`);
+    } else {
+      res.send("error");
+    }
   }
-});
+);
 
 //search Restaurant
 
@@ -148,47 +151,53 @@ router.get("/search/byCate", (req, res) => {
 });
 
 //add favorite list
-router.get("/favorite/:id", authenticalMDW.isLogined, async function (req, res) {
-  var rid = +req.params.id;
-  var uid = +req.user.userID;
-  const favList = req.session.favoriteList;
-  if (favList.indexOf(rid) > -1) {
-    const result = await favoriteModel.delete([uid, rid]);
-  } else {
-    const entity = {
-      uid,
-      rid,
-    };
-    const result = await favoriteModel.add(entity);
+router.get(
+  "/favorite/:id",
+  authenticalMDW.isLogined,
+  async function (req, res) {
+    var rid = +req.params.id;
+    var uid = +req.user.userID;
+    const favList = req.session.favoriteList;
+    if (favList.indexOf(rid) > -1) {
+      const result = await favoriteModel.delete([uid, rid]);
+    } else {
+      const entity = {
+        uid,
+        rid,
+      };
+      const result = await favoriteModel.add(entity);
+    }
+    res.redirect("/");
   }
-  res.redirect("/");
-});
+);
 //favorite list page
-router.get("/favoriteList", authenticalMDW.isLogined, async function (req, res) {
-  const favList = await favoriteModel.getListFavorite(req.user.userID);
-  res.render("favoriteList", {
-    // cookie: req.cookies,
-    session: req.session,
-    FavoriteList: favList[0],
-  });
-});
+router.get(
+  "/favoriteList",
+  authenticalMDW.isLogined,
+  async function (req, res) {
+    const favList = await favoriteModel.getListFavorite(req.user.userID);
+    res.render("favoriteList", {
+      // cookie: req.cookies,
+      session: req.session,
+      FavoriteList: favList[0],
+    });
+  }
+);
 
 //Booking
 
 router.post("/booking", authenticalMDW.isLogined, async function (req, res) {
   var vouID;
-  if(req.body.vouID==0)
-  vouID=null;
-  else
-  vouID=+req.body.vouID;
+  if (req.body.vouID == 0) vouID = null;
+  else vouID = +req.body.vouID;
   var date = new Date(req.body.ReserveTime);
 
   const reservation = {
-    rid:req.body.rid,
-    ReserveTime:date,
-    NumOfDiners:req.body.NumOfDiners,
-    Note:req.body.Note,
-    vouID:vouID,
+    rid: req.body.rid,
+    ReserveTime: date,
+    NumOfDiners: req.body.NumOfDiners,
+    Note: req.body.Note,
+    vouID: vouID,
     uid: req.user.userID,
   };
   const rs = await reservationModel.add(reservation);
@@ -215,5 +224,12 @@ router.get("/viewMenu", async (req, res) => {
   res.render("viewMenu", {
     layout: "empty",
     menuData: menu[0] === undefined ? "" : menu[0].menu,
+  });
+});
+
+//help
+router.get("/help", (req, res) => {
+  res.render("help", {
+    // layout: "empty",
   });
 });

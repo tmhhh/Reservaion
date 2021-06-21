@@ -1,34 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Guildline</title>
-
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<!-- Bootstrap 4 -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-
-	<!-- JQuery UI -->
-	<link rel="stylesheet" href="css/jquery-ui.min.css">
-
-	<!-- Animate -->
-	<!-- <link rel="stylesheet" href="css/animate.css"> -->
-
-	<!-- My CSS -->
-	<link rel="stylesheet" href="css/modal.css">
-
-	<link rel="stylesheet" href="css/style4.css">
-
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-</head>
-
+<link rel="stylesheet" type="text/css" href="/css/help.css">
 <body>
 
-	<div class="wrapper">
+	<div class="wrapper help-content">
 		<!-- Sidebar Holder -->
 		<nav id="sidebar">
 				<div class="sidebar-header">
@@ -51,7 +25,7 @@
 					</li>
 					<li>
 						<a href="#favourite">
-							<i class="fa fa-files-o"></i>
+							<i class="fa fa-list"></i>
 							Favourite List
 						</a>
 					</li>
@@ -79,7 +53,7 @@
 
 		<!-- Page Content Holder -->
 		<div id="content">
-			<nav class="navbar navbar-default">
+			{{!-- <nav class="navbar navbar-default">
 				<div class="container-fluid">
 
 					<div class="navbar-header">
@@ -98,10 +72,16 @@
 						</ul>
 					</div>
 				</div>
-			</nav>
+			</nav> --}}
 
 
 			<div class="container">
+				<div class="navbar-header">
+						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+							<i class="glyphicon glyphicon-align-left"></i>
+							<span> View more</span>
+						</button>
+					</div>
 		<!-- Booking -->
 				<div class="page__content pt-3 " id="booking">
 					<h2 class="pt-3">HOW TO BOOK TABLE NOW?</h2>
@@ -190,10 +170,9 @@
    
 
 	<!-- Bootstrap -->
-	<script src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+
 	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -209,8 +188,7 @@
 			});
 		});
 	</script>
-	    <script src="./js/main.js"></script>
-		<script src="./js/util.js"></script>
+	    <script src="./js/help.js"></script>
 </body>
 
 </html>
