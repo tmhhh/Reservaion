@@ -30,35 +30,27 @@
   </ul>
 
   {{#if user}}
-    <div class="mr-4">
-      <li class="nav-item dropdown font-weight-bold userDropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarScrollingDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-expanded="false"
-        >
-          {{! <i class="fas fa-search searchIcon"></i> }}
-          <img class="userAvatar" src="/img/user/{{user.userPic}}" alt="" />
-          {{user.userFName}}
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-          <li><a class="dropdown-item" href="#"><i class="far fa-user"></i>
-              Người dùng:
-              {{user.userNameID}}</a></li>
-          <li><a class="dropdown-item" href="/profile"><i
-                class="fas fa-user-circle"
-              ></i>
-              Cập nhật tài khoản
-            </a></li>
-          {{#compare user.userType 2}}
-            <li><a class="dropdown-item" href="/manager"><i
-                  class="fas fa-utensils"
-                ></i>
-                Quản lí nhà hàng
-              </a></li>
+
+  <div class="mr-4">
+    <li class="nav-item dropdown font-weight-bold userDropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
+        aria-expanded="false">
+        
+        <img class="userAvatar" src="/img/user/{{user.userPic}}" alt="" />
+        {{user.userFName}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+        <li><a class="dropdown-item" href="#"><i class="far fa-user"></i>
+            Người dùng:
+            {{user.userNameID}}</a></li>
+        <li><a class="dropdown-item" href="/profile"><i class="fas fa-user-circle"></i>
+            Cập nhật tài khoản
+          </a></li>
+        {{#compare user.userType 2}}
+        <li><a class="dropdown-item" href="/manager"><i class="fas fa-utensils"></i>
+            Quản lí nhà hàng
+          </a></li>
+
 
           {{/compare}}
           {{#compare user.userType 1}}

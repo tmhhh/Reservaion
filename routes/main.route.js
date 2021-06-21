@@ -7,8 +7,10 @@ const feedbackModel = require("../models/feedback.model");
 const replyFBModel = require("../models/replyFB.model");
 const { upload } = require("../controllers/upload.controller");
 const favoriteModel = require("../models/favoriteList.model");
-const middleware = require("../models/middleware");
+const authenticalMDW = require("../middleware/authenticate.mdw");
 const reservationModel = require("../models/reservation.model");
+const voucherModel=require('../models/voucher.model');
+
 router.get("/", async function (req, res) {
   const listRestaunrant = await restaurantModel.getAll();
   req.session.listRes = listRestaunrant;
@@ -51,7 +53,7 @@ router.post(
 router.use("/login", require("./login.route"));
 
 //logout
-router.get("/logout", (req, res) => {
+router.get("/logout",authenticalMDW.isLogined ,(req, res) => {
   // res.clearCookie("user_data");
   req.session.destroy();
   res.redirect("/");
@@ -64,7 +66,14 @@ router.get("/resDetail", async function (req, res) {
   const feedback = await feedbackModel.getFeedBackAndUsersByID(req.query.id);
   const reply = await replyFBModel.getReplyAndUsersByID(req.query.id);
   const rating = await restaurantModel.getRatingByID(req.query.id);
+
+  const voucher=await voucherModel.getVouByResID(req.query.id);
+  // console.log(restaurant[0]);
+  // console.log('------');
+  // console.log(restaurant);
+
   const menu = await restaurantModel.getMenu(req.query.id);
+
 
   res.render("productDetail", {
     Feedback: feedback,
@@ -72,13 +81,16 @@ router.get("/resDetail", async function (req, res) {
     rImages,
     Reply: reply,
     Rating: rating[0],
+    voucher,
+
     menuData: menu[0] === undefined ? "" : menu[0].menu,
+
     layout: "main",
   });
 });
 
 //feedback
-router.post("/resDetail", async function (req, res) {
+router.post("/resDetail",authenticalMDW.isLogined ,async function (req, res) {
   var date = new Date();
   console.log(date);
   const feedback = {
@@ -93,8 +105,9 @@ router.post("/resDetail", async function (req, res) {
 
 //reply
 
-router.post("/resDetail/reply", async function (req, res) {
+router.post("/resDetail/reply",authenticalMDW.isLogined ,async function (req, res) {
   if (req.body.replyContent && req.body.replyContent.trim()) {
+    console.log(req.body);
     var date = new Date();
     const reply = {
       userID: +req.user.userID,
@@ -135,7 +148,7 @@ router.get("/search/byCate", (req, res) => {
 });
 
 //add favorite list
-router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
+router.get("/favorite/:id", authenticalMDW.isLogined, async function (req, res) {
   var rid = +req.params.id;
   var uid = +req.user.userID;
   const favList = req.session.favoriteList;
@@ -151,7 +164,7 @@ router.get("/favorite/:id", middleware.isLogined, async function (req, res) {
   res.redirect("/");
 });
 //favorite list page
-router.get("/favoriteList", middleware.isLogined, async function (req, res) {
+router.get("/favoriteList", authenticalMDW.isLogined, async function (req, res) {
   const favList = await favoriteModel.getListFavorite(req.user.userID);
   res.render("favoriteList", {
     // cookie: req.cookies,
@@ -161,9 +174,21 @@ router.get("/favoriteList", middleware.isLogined, async function (req, res) {
 });
 
 //Booking
-router.post("/booking", middleware.isLogined, async function (req, res) {
+
+router.post("/booking", authenticalMDW.isLogined, async function (req, res) {
+  var vouID;
+  if(req.body.vouID==0)
+  vouID=null;
+  else
+  vouID=+req.body.vouID;
+  var date = new Date(req.body.ReserveTime);
+
   const reservation = {
-    ...req.body,
+    rid:req.body.rid,
+    ReserveTime:date,
+    NumOfDiners:req.body.NumOfDiners,
+    Note:req.body.Note,
+    vouID:vouID,
     uid: req.user.userID,
   };
   const rs = await reservationModel.add(reservation);
@@ -177,7 +202,7 @@ router.post("/booking", middleware.isLogined, async function (req, res) {
 });
 
 //Rating
-router.post("/rating", middleware.isLogined, async function (req, res) {
+router.post("/rating", authenticalMDW.isLogined, async function (req, res) {
   const rs = await restaurantModel.rating(req.body.rid, req.body.rating);
   res.redirect(`resDetail?id=${req.body.rid}`);
 });

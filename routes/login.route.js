@@ -11,12 +11,12 @@ const userController = require("../controllers/user.controller");
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-router.get("/private", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.send("ok");
-    console.log(req.user);
-  }
-});
+// router.get("/private", (req, res) => {
+//   if (req.isAuthenticated()) {
+//     res.send("ok");
+//     console.log(req.user);
+//   }
+// });
 
 router.get("/", function (req, res) {
   res.render("vwSignIn&SignUp/signIn", { layout: false });
@@ -41,7 +41,7 @@ router.post(
   "/",
   passport.authenticate("local", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect('/');
   }
 );
 
@@ -63,7 +63,8 @@ passport.use(
       clientID:
         "276022586484-2s9ui1rmhqvc8a6csc05nn2vcnva453d.apps.googleusercontent.com",
       clientSecret: "VoKthWq43LJJ6mSd4jTU8pzO",
-      callbackURL: "http://localhost:3000/login/google/cb",
+      // callbackURL: "http://localhost:3000/login/google/cb",
+      callbackURL: "https://tmh-reservation.herokuapp.com/login/google/cb"
     },
 
     async (accessToken, refreshToken, profile, done) => {
@@ -112,9 +113,10 @@ router.get(
 passport.use(
   new FbStrategy(
     {
-      clientID: "1467145890122598",
-      clientSecret: "9bab58404fc775471a7722860564e725",
-      callbackURL: "http://localhost:3000/login/fb/cb",
+      clientID: "1061366784392713",
+      clientSecret: "1518fc9d11dd2986c0d9d35febed8164",
+	   callbackURL: "https://tmh-reservation.herokuapp.com/login/fb/cb",
+      // callbackURL: "http://localhost:3000/login/fb/cb",
       profileFields: ["email", "displayName"],
     },
     async function (accessToken, refreshToken, profile, done) {

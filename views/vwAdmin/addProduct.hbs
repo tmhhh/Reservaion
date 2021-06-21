@@ -19,7 +19,16 @@
   *
   <p class="error-message">
   </p>
+  <span><i class="fas fa-utensils"></i> Thể loại:</span>
 
+ <select name="resCate" id="">
+   {{#each listCate}}
+         <option value="{{cateID}}">{{cateName}}</option>
+   {{/each}}
+    
+  </select>  *
+  <p class="error-message">
+  </p>
   <p><i class="fas fa-people-arrows"></i> Manager ID:</p>
 
   <input type="text" name="managerID" value="{{this.user.userID}}" readonly />
@@ -72,7 +81,7 @@
   <p class="error-message">
   </p>
 
-  {{! <p class="mt-4">Res Thumbnail <input type="file" name="resThumbnail"   /> </p> }}
+
   <p class="mt-4">Res Images <input type="file" name="resImage" multiple /> </p>
 
   <input
