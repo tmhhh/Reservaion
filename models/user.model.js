@@ -38,4 +38,8 @@ module.exports = {
     const userID = { userID: id };
     return db.getByCondition(sql, userID);
   },
+  getDiscount: function (uid, rid) {
+    const sql = `SELECT * FROM voucher WHERE uid = ? AND rid = ?`;
+    return db.getByCondition(sql, [uid, rid]);
+  },
 };

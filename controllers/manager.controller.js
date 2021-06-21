@@ -30,8 +30,9 @@ module.exports = {
     });
   },
   confirmBooking: async function (req, res) {
-    var rs = await reserveModel.confirm(req.query);
-    rs = await reserveModel.updateRevenues(req.body.rid, date.getMonth() + 1);
+    var rs = await reserveModel.confirm({ id: req.query.id });
+    var date = new Date(req.query.time);
+    rs = await reserveModel.updateRevenues(req.query.rid, date.getMonth() + 1);
     res.redirect("/manager/BookingList");
   },
   cancelBooking: async function (req, res) {
@@ -42,7 +43,6 @@ module.exports = {
     res.render("vwAdmin/designMenuPage", {
       layout: "manager",
       session: req.session,
-      // cookie: req.cookies,
     });
   },
   addMenu: async function (req, res) {

@@ -57,12 +57,11 @@
                 <td>{{ReserveTime}}</td>
                 <td>{{NumOfDiners}}</td>
                 <td>{{Note}}</td>
-
                 <td>
-                  <a href="/manager/confirm?id={{id}}" class="confirm"><i
-                      class="fas fa-check-square"
-                      title="Confirm"
-                    ></i></a>
+                  <a
+                    href="/manager/confirm?id={{id}}&rid={{rid}}&time={{ReserveTime}}"
+                    class="confirm"
+                  ><i class="fas fa-check-square" title="Confirm"></i></a>
                   <a
                     href="/manager/cancel?id={{id}}"
                     class="delete"

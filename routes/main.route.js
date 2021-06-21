@@ -65,11 +65,8 @@ router.get("/resDetail", async function (req, res) {
   const reply = await replyFBModel.getReplyAndUsersByID(req.query.id);
   const rating = await restaurantModel.getRatingByID(req.query.id);
   const menu = await restaurantModel.getMenu(req.query.id);
-  // console.log(restaurant[0]);
-  // console.log('------');
-  // console.log(restaurant);
+
   res.render("productDetail", {
-    // cookie: req.cookies,
     Feedback: feedback,
     Restaurant: restaurant[0],
     rImages,
@@ -165,7 +162,6 @@ router.get("/favoriteList", middleware.isLogined, async function (req, res) {
 
 //Booking
 router.post("/booking", middleware.isLogined, async function (req, res) {
-  var date = new Date(req.body.ReserveTime);
   const reservation = {
     ...req.body,
     uid: req.user.userID,
