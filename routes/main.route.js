@@ -9,7 +9,7 @@ const { upload } = require("../controllers/upload.controller");
 const favoriteModel = require("../models/favoriteList.model");
 const authenticalMDW = require("../middleware/authenticate.mdw");
 const reservationModel = require("../models/reservation.model");
-
+const voucherModel=require('../models/voucher.model');
 
 router.get("/", async function (req, res) {
   const listRestaunrant = await restaurantModel.getAll();
@@ -67,6 +67,7 @@ router.get("/resDetail", async function (req, res) {
   const feedback = await feedbackModel.getFeedBackAndUsersByID(req.query.id);
   const reply = await replyFBModel.getReplyAndUsersByID(req.query.id);
   const rating = await restaurantModel.getRatingByID(req.query.id);
+  const voucher=await voucherModel.getVouByResID(req.query.id);
   // console.log(restaurant[0]);
   // console.log('------');
   // console.log(restaurant);
@@ -77,6 +78,7 @@ router.get("/resDetail", async function (req, res) {
     rImages,
     Reply: reply,
     Rating: rating[0],
+    voucher,
     layout: "main",
   });
 });
@@ -171,9 +173,18 @@ router.get("/favoriteList", authenticalMDW.isLogined, async function (req, res) 
 
 //Booking
 router.post("/booking", authenticalMDW.isLogined, async function (req, res) {
+  var vouID;
+  if(req.body.vouID==0)
+  vouID=null;
+  else
+  vouID=+req.body.vouID;
   var date = new Date(req.body.ReserveTime);
   const reservation = {
-    ...req.body,
+    rid:req.body.rid,
+    ReserveTime:date,
+    NumOfDiners:req.body.NumOfDiners,
+    Note:req.body.Note,
+    vouID:vouID,
     uid: req.user.userID,
   };
   const rs = await reservationModel.add(reservation);

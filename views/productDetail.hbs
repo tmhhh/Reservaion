@@ -303,6 +303,15 @@
                                         <textarea id="" cols="30" rows="10" class="form-control my-2"
                                             placeholder="Ghi chú" name="Note"></textarea>
                                     </div>
+                                    <div class="col-12 	">
+                                        <a class="btn btn-secondary font-weight-bold">Sử dụng voucher</a>
+                                        <select name="vouID">
+                                            <option value="0">Không sử dụng</option>
+                                            {{#each this.voucher}}
+                                            <option value="{{vouID}}">{{vouKey}} (-{{vouValue}}%) </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
 
                                 </div>
                             </div>
@@ -311,6 +320,8 @@
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
+
+
                             <input type="hidden" name="rid" value="{{Restaurant.resID}}">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-warning">Đặt Chỗ</button>
