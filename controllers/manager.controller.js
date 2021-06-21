@@ -30,12 +30,32 @@ module.exports = {
     });
   },
   confirmBooking: async function (req, res) {
-    var rs = await reserveModel.confirm(req.query);
-    rs = await reserveModel.updateRevenues(req.body.rid, date.getMonth() + 1);
+    var rs = await reserveModel.confirm({ id: req.query.id });
+    var date = new Date(req.query.time);
+    rs = await reserveModel.updateRevenues(req.query.rid, date.getMonth() + 1);
     res.redirect("/manager/BookingList");
   },
   cancelBooking: async function (req, res) {
     const rs = await reserveModel.cancel(req.query);
     res.redirect("/manager/BookingList");
+  },
+  DesignMenu: function (req, res) {
+    res.render("vwAdmin/designMenuPage", {
+      layout: "manager",
+      session: req.session,
+    });
+  },
+  addMenu: async function (req, res) {
+    let resID = req.query.id;
+    const menu = await restaurantModel.getMenu(resID);
+    res.render("vwAdmin/addMenu", {
+      layout: "manager",
+      menuData: menu[0] === undefined ? "" : menu[0].menu,
+      resID: resID,
+    });
+  },
+  saveMenu: async function (req, res) {
+    const rs = await restaurantModel.saveMenu(req.body);
+    res.redirect("/manager/DesignMenu");
   },
 };

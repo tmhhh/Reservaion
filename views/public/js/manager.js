@@ -10,9 +10,13 @@ document
 document.querySelector(".booking_list").addEventListener("click", function () {
   window.location.replace("/manager/BookingList");
 });
+
 document.querySelector(".voucher-generator").addEventListener('click', () => {
   window.location.replace("/manager/voucher");
-})
+});
+document.querySelector(".design_menu").addEventListener("click", function () {
+  window.location.replace("/manager/DesignMenu");
+});
 
 
 //voucher
@@ -55,5 +59,8 @@ function gernateVoucher(length) {
   }
   return result;
 }
+
+
+
 
 

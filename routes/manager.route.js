@@ -10,6 +10,9 @@ router.get("/resetRevenues/:id", managerCtrl.resetRevenues);
 router.get("/BookingList", managerCtrl.BookingList);
 router.get("/confirm", managerCtrl.confirmBooking);
 router.get("/cancel", managerCtrl.cancelBooking);
+router.get("/DesignMenu", managerCtrl.DesignMenu);
+router.get("/Menu", managerCtrl.addMenu);
+router.post("/Menu", managerCtrl.saveMenu);
 router.get("/", managerCtrl.index);
 router.get("/voucher",voucherCtrl.index);
 

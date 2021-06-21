@@ -64,3 +64,11 @@ ratingBtn.forEach(function (e) {
     ratingPoint.value = Array.prototype.indexOf.call(ratingBtn, e) + 1;
   });
 });
+
+document
+  .querySelector(".resDetail__menu")
+  .addEventListener("click", function () {
+    window.location.replace(
+      `/viewMenu?id=${document.getElementById("resID").value}`
+    );
+  });

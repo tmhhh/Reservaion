@@ -88,6 +88,7 @@
                         </p>
                         <p class="resDetail__rate" data-toggle="modal" data-target="#Rating"><i
                                 class="fas fa-star-half-alt"></i> Đánh giá</p>
+                        <p class="resDetail__menu" data-toggle="modal" data-target="#Menu"><i class="fas fa-hamburger"></i> Xem menu</p>
                         <p class="resDetail__time"><i class="fa fa-clock"></i> Mở cửa <span>{{Restaurant.resOpen}} -
                                 {{Restaurant.resClose}}</span> </p>
                         <p class="resDetail__price"><i class="fa fa-dollar-sign"></i> Giá trung bình:
@@ -303,6 +304,7 @@
                                         <textarea id="" cols="30" rows="10" class="form-control my-2"
                                             placeholder="Ghi chú" name="Note"></textarea>
                                     </div>
+
                                     <div class="col-12 	">
                                         <a class="btn btn-secondary font-weight-bold">Sử dụng voucher</a>
                                         <select name="vouID">
@@ -312,6 +314,7 @@
                                             {{/each}}
                                         </select>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -368,7 +371,7 @@
 
         </div>
     </form>
-
+    
     <div id="chat-bot">
         <div class="messenger br10">
             <div class="timestamp">04:45 AM</div>
@@ -391,11 +394,13 @@
             </div>
             <i class="fab fa-facebook-messenger"></i>
         </div>
-    </div>
-    <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
-    <input type="hidden" id="rid" value="{{Restaurant.managerID}}">
-    <input type="hidden" id="uid" value="{{#if user}}{{user.userID}}{{else}}customer{{/if}}">
-    <input type="hidden" id="type" value="Customer">
+
+    </div>  
+     <input type="hidden" id="resID" value="{{Restaurant.resID}}">
+ <input type="hidden" id="restaurant" value="{{Restaurant.resName}}">
+<input type="hidden" id="rid" value="{{Restaurant.managerID}}">
+<input type="hidden" id="uid" value="{{#if user}}{{user.userID}}{{else}}customer{{/if}}">
+<input type="hidden" id="type" value="Customer">
     <script src="/vendor/jquery/jquery.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chatbox.js"></script>

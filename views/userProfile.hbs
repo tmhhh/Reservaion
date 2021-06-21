@@ -22,13 +22,13 @@
             <div class="header-profile">
               <div class="row align-items-center" style="margin: 15px 0">
                 <div class="col-auto">
-                  <img class="avatar-circle" src="img/user/{{user.userPic}}" alt="Thành" />
+                  <img class="avatar-circle" src="img/user/{{user.userPic}}" alt="" />
                 </div>
                 <div class="col txt-bold font15">{{user.userFName}}</div>
               </div>
             </div>
             <div class="navigation-profile">
-              <a class="item-navigation active" title="Cập nhật tài khoản" href="#">
+              <a id="user-info" class="item-navigation active " title="Cập nhật tài khoản" href="#">
                 <div class="row">
                   <div class="col-auto"><i class="fas fa-user"></i></div>
                   <div class="col">Cập nhật tài khoản</div>
@@ -37,8 +37,8 @@
                   </div>
                 </div>
               </a>
-              <div class="item-navigation">
-                <a title="update_address" class="" href="#">
+              <div  class="item-navigation">
+                <a id="user-booking" title="update_address" class="" href="#">
                   <div class="row">
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart"></i>
@@ -69,7 +69,7 @@
         </div>
         <!-- phai -->
         <div class="col-8">
-          <div class="now-detail-profile">
+          <div id="user-info-profile" class="now-detail-profile">
             <div class="header-user-profile">Thông tin người dùng</div>
             <div class="content-user-profile">
               <div class="user-profile-update">
@@ -77,17 +77,15 @@
                 <div class="row">
                   <div class="col-3">
                     <div class="user-avatar-image">
-                      <img
-                        src="img/user/{{user.userPic}}"
-                        alt="" id="avatar_user" />
+                      <img src="img/user/{{user.userPic}}" alt="" id="avatar_user" />
                     </div>
                   </div>
                   <form class="col-9" method="POST" action="/profile/image" enctype="multipart/form-data">
                     <div class="form-group">
                       <span>Tải lên từ</span>
                       <div class="custom-file-image">
-                        <input type="file" id="validatedCustomFile" class="input-custom" name="userPic"
-                          accept="image/*"  hidden=""/><label class="label-custom" for="validatedCustomFile">Chọn</label><span
+                        <input type="file" id="validatedCustomFile" class="input-custom" name="userPic" accept="image/*"
+                          hidden="" /><label class="label-custom" for="validatedCustomFile">Chọn</label><span
                           class="font-italic" style="font-size: 13px">Chấp nhận GIF, JPEG, PNG, BMP với kích thước tối
                           đa 5.0 MB</span>
                       </div>
@@ -100,7 +98,7 @@
               </div>
               <hr />
               <div class="user-profile-update">
-                <form id="frmUpdateInfo" action="/profile/info" method="POST" >
+                <form id="frmUpdateInfo" action="/profile/info" method="POST">
                   <div class="title-user">Thay đổi thông tin</div>
                   <div class="row form-group align-items-center">
                     <div class="col-3 txt-bold">Tên</div>
@@ -132,7 +130,7 @@
                     <div class="col-3 txt-bold">Email</div>
                     <div class="col-8">
                       <div class="input-group">
-                        <input name="userEmail" type="text" class="show-email"value="{{user.userEmail}}"/>
+                        <input name="userEmail" type="text" class="show-email" value="{{user.userEmail}}" />
                       </div>
                     </div>
                   </div>
@@ -140,7 +138,7 @@
                     <div class="col-3 txt-bold">Số điện thoại</div>
                     <div class="col-8">
                       <div class="input-group">
-                        <input name="userPhone" type="text" class="show-email" value="{{user.userPhone}}"/>
+                        <input name="userPhone" type="text" class="show-email" value="{{user.userPhone}}" />
                       </div>
                     </div>
                   </div>
@@ -160,8 +158,8 @@
                         <div class="col-3 txt-bold">Mật khẩu mới</div>
                         <div class="col-4">
                           <div class="input-group validate-pass">
-                            <input id="password" name="userPassword" placeholder="Mật khẩu mới" type="password" class="form-control"
-                              value="" />
+                            <input id="password" name="userPassword" placeholder="Mật khẩu mới" type="password"
+                              class="form-control" value="" />
                           </div>
                         </div>
                       </div>
@@ -180,7 +178,7 @@
                   </div>
                   <div class="row mt-4">
                     <div class="col-3">
-                      <button  type="submit" class="btn btn-blue-4 btn-block luu">
+                      <button type="submit" class="btn btn-blue-4 btn-block luu">
                         Lưu thay đổi
                       </button>
                     </div>
@@ -213,32 +211,60 @@
                     </div>
                   </div>
                 </div>
-                {{!--
               </div>
-              <div class="user-profile-update">
-                <div class="title-user">Quản lý số điện thoại</div>
-                <div class="list-phone">
-                  <div class="list-phone-row">
-                    <div class="row align-items-center">
-                      <div class="col-3 txt-bold">0869245090</div>
-                      <div>
-                        <span class="phone-verified"><i class="fas fa-check-circle txt-green font16"></i>Số điện thoại
-                          đã được xác thực</span>
-                      </div>
-                      <div class="col-7 btn-update-phone-number dt">
-                        <button class="btn btn-blue-4" type="button">
-                          Cập nhật số điện thoại
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> --}}
+            </div>
+
+
+          </div>
+          <div class="now-detail-profile" id="user-booking-profile">
+            <div class="header-user-profile">Thông tin đặt bàn</div>
+            <div class="content-user-profile">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+
+                    <th>Reservation ID</th>
+                    <th>Restaurant</th>
+                    <th>Check in</th>
+                    <th>Number of Diners</th>
+                    <th>Note</th>
+                    <th>Don't sure🤔</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#if this.BookingList}}
+                  {{#each this.BookingList}}
+
+                  <tr>
+
+                    <td>{{id}}</td>
+                    <td>{{resName}}</td>
+                    <td>{{dateFormat ReserveTime}}</td>
+                    <td>{{NumOfDiners}}</td>
+                    <td>{{Note}}</td>
+
+                    <td>
+                      <a href="/profile/cancelBooking?id={{id}}&rid={{rid}}" class="btn btn-danger">HỦY</a>
+                    </td>
+                  </tr>
+
+                  {{/each}}
+
+                  {{/if}}
+
+                </tbody>
+              </table>
+
             </div>
           </div>
         </div>
+        <div class="col-1"></div>
       </div>
+
     </div>
-    <div class="col-1"></div>
-  </div>
+
+
+
+
+
 </main>

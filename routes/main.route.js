@@ -27,7 +27,6 @@ router.get("/", async function (req, res) {
   });
 });
 
-
 //user profile
 router.use("/profile", require("./user.route"));
 
@@ -67,18 +66,25 @@ router.get("/resDetail", async function (req, res) {
   const feedback = await feedbackModel.getFeedBackAndUsersByID(req.query.id);
   const reply = await replyFBModel.getReplyAndUsersByID(req.query.id);
   const rating = await restaurantModel.getRatingByID(req.query.id);
+
   const voucher=await voucherModel.getVouByResID(req.query.id);
   // console.log(restaurant[0]);
   // console.log('------');
   // console.log(restaurant);
+
+  const menu = await restaurantModel.getMenu(req.query.id);
+
+
   res.render("productDetail", {
-    // cookie: req.cookies,
     Feedback: feedback,
     Restaurant: restaurant[0],
     rImages,
     Reply: reply,
     Rating: rating[0],
     voucher,
+
+    menuData: menu[0] === undefined ? "" : menu[0].menu,
+
     layout: "main",
   });
 });
@@ -128,22 +134,18 @@ router.post("/search", async function (req, res) {
   });
 });
 
-
 //search Res by cate
-router.get("/search/byCate",(req,res)=>{
-  const cateID =+req.query.cate;
-  var listRestaunrant=[];
-  req.session.listRes.forEach(e => {
-    if(e.resCate === cateID)
-    listRestaunrant.push(e);
+router.get("/search/byCate", (req, res) => {
+  const cateID = +req.query.cate;
+  var listRestaunrant = [];
+  req.session.listRes.forEach((e) => {
+    if (e.resCate === cateID) listRestaunrant.push(e);
   });
-  res.render('homepage',{
+  res.render("homepage", {
     listRestaunrant,
     session: req.session,
-
   });
-  
-})
+});
 
 //add favorite list
 router.get("/favorite/:id", authenticalMDW.isLogined, async function (req, res) {
@@ -172,6 +174,7 @@ router.get("/favoriteList", authenticalMDW.isLogined, async function (req, res) 
 });
 
 //Booking
+
 router.post("/booking", authenticalMDW.isLogined, async function (req, res) {
   var vouID;
   if(req.body.vouID==0)
@@ -179,6 +182,7 @@ router.post("/booking", authenticalMDW.isLogined, async function (req, res) {
   else
   vouID=+req.body.vouID;
   var date = new Date(req.body.ReserveTime);
+
   const reservation = {
     rid:req.body.rid,
     ReserveTime:date,
@@ -204,4 +208,12 @@ router.post("/rating", authenticalMDW.isLogined, async function (req, res) {
 });
 module.exports = router;
 
-
+//View menu
+router.get("/viewMenu", async (req, res) => {
+  let resID = req.query.id;
+  const menu = await restaurantModel.getMenu(resID);
+  res.render("viewMenu", {
+    layout: "empty",
+    menuData: menu[0] === undefined ? "" : menu[0].menu,
+  });
+});

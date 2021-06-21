@@ -36,23 +36,39 @@ btnChangePass.addEventListener("click", () => {
 //     // txtPass.classList.toggle("hidden");
 //   });
 
-const frmUpdateInfo=document.querySelector("#frmUpdateInfo");
-var check=false;
-frmUpdateInfo.addEventListener("submit",function(e){
-    e.preventDefault();
-    const password =document.querySelector("#password");
-    const re_password =document.querySelector("#re_password");
+const frmUpdateInfo = document.querySelector("#frmUpdateInfo");
+var check = false;
+frmUpdateInfo.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const password = document.querySelector("#password");
+  const re_password = document.querySelector("#re_password");
 
-    if(password.value===re_password.value)
-    {
-      frmUpdateInfo.submit();
-    }
-    else
-    {
-      alert("Repassword is incorrect");
+  if (password.value === re_password.value) {
+    frmUpdateInfo.submit();
+  } else {
+    alert("Repassword is incorrect");
+  }
+});
 
-    }
-  
+var userInfo= document.getElementById('user-info');
+var userBooking=document.getElementById('user-booking');
+var frmBookingDetail = document.getElementById('user-booking-profile');
+var frmInfoProfile=document.getElementById('user-info-profile');
+frmBookingDetail.style.display="none";
+console.log(userInfo);
+userInfo.addEventListener('click',(e)=>
+{
+  userBooking.style.color="black";
+  // e.target.parentElement.style.color="red";
+  userInfo.style.color="red";
 
-
-})
+  frmInfoProfile.style.display="block";
+  frmBookingDetail.style.display="none";
+});
+userBooking.addEventListener('click',(e)=>{
+  userInfo.style.color="black";
+  // e.target.parentElement.style.color="red";
+  userBooking.style.color="red";
+  frmInfoProfile.style.display="none";
+  frmBookingDetail.style.display="block";
+});
