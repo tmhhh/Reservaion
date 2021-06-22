@@ -64,7 +64,7 @@ passport.use(
         "276022586484-2s9ui1rmhqvc8a6csc05nn2vcnva453d.apps.googleusercontent.com",
       clientSecret: "VoKthWq43LJJ6mSd4jTU8pzO",
       // callbackURL: "http://localhost:3000/login/google/cb",
-      callbackURL: "https://tmh-reservation.herokuapp.com/login/google/cb"
+      callbackURL: "https://se-reservation.herokuapp.com/login/google/cb"
     },
 
     async (accessToken, refreshToken, profile, done) => {
@@ -115,7 +115,7 @@ passport.use(
     {
       clientID: "1061366784392713",
       clientSecret: "1518fc9d11dd2986c0d9d35febed8164",
-	   callbackURL: "https://tmh-reservation.herokuapp.com/login/fb/cb",
+	   callbackURL: "https://se-reservation.herokuapp.com/login/fb/cb",
       // callbackURL: "http://localhost:3000/login/fb/cb",
       profileFields: ["email", "displayName"],
     },
