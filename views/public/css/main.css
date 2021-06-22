@@ -1052,7 +1052,7 @@ footer .footer__diachi li span {
 .userDropdown i {
   font-size: 20px;
   position: absolute;
-  right: 149px;
+  left: 5px;
 }
 .dropdown-menu{
   padding-left:15px !important;
