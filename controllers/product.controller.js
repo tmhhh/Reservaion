@@ -42,7 +42,6 @@ module.exports = {
       resCate:req.body.resCate
     };
     const id = +Restaurant.resID;
-    const result = await restaurantModel.update(Restaurant);
     if(req.files.length>0)
     {
       Restaurant.resThumbnail=req.files[0].filename;
@@ -56,6 +55,8 @@ module.exports = {
         await resImageModel.add(resImage);
       });
     }
+    const result = await restaurantModel.update(Restaurant);
+
           
     next();
   },
