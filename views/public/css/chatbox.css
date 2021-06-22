@@ -135,3 +135,19 @@ body {
   margin-bottom: 10px;
 }
 /* chat-bot	 end */
+
+/* notification badge */
+.have-message :after {
+  position: absolute;
+  right: 0px;
+  top: 25px;
+  /* min-width: 10px;
+  min-height: 10px; */
+  /* line-height: 10px; */
+  padding: 5px;
+  color: #fff;
+  background-color: #1df500;
+  font-size: 5px;
+  border-radius: 50%;
+  content: "+";
+}

@@ -1,4 +1,14 @@
 const listRes = document.querySelectorAll(".chart-container");
+document.querySelectorAll(".reset-btn").forEach((ele) => {
+  ele.addEventListener("click", () => {
+    let confirmAction = confirm(
+      "Bạn có chắc là muốn reset lại doanh thu trong năm?"
+    );
+    if (confirmAction) {
+      window.location.replace(ele.getAttribute("reset-link"));
+    }
+  });
+});
 
 listRes.forEach((e) => {
   let id = e.getAttribute("resID");

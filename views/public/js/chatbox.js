@@ -15,6 +15,7 @@ chat_btn.click(() => {
   setTimeout(() => {
     chat_box.toggleClass("expanded");
   }, 100);
+  chat_btn.removeClass("have-message");
 });
 
 const restaurant = document.getElementById("restaurant");
@@ -39,6 +40,7 @@ sendBtn.addEventListener("click", (ele) => {
 
 socketio.on("chat", (data) => {
   chatroom.innerHTML = chatroom.innerHTML + msgLeftHTML(data);
+  chat_btn.addClass("have-message");
 });
 
 window.setInterval(function () {

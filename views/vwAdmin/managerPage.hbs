@@ -6,7 +6,7 @@
 <div class="container-fluid">
   {{#each session.myRestaurant}}
     <div class="eachRes">
-      <h2>Doanh thu nhà hàng: {{resName}} <a class="float-right mt-4 btn btn-secondary"href="/manager/resetRevenues/{{resID}}">RESET REVENUES</a></h2>
+      <h2>Doanh thu nhà hàng: {{resName}} <button class="float-right mt-4 btn btn-danger reset-btn" reset-link="/manager/resetRevenues/{{resID}}">RESET REVENUES</button></h2>
       <div class="chart-container  " resID="{{resID}}" rating="{{rating}}">
         <div class="pieChart" id="pieChart-{{resID}}"></div>
         <div class="colChart" id="columnChart-{{resID}}"></div>

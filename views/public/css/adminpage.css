@@ -1,6 +1,9 @@
 input[type="text"] {
   width: 90%;
 }
+.navbar-nav {
+  background-color: rgb(255, 115, 0);
+}
 .form {
   border-radius: 20px;
   width: 40%;
