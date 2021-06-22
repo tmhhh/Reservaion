@@ -22,6 +22,10 @@ module.exports = {
       Restaurants: req.session.Restaurants,
     });
   },
+  deleteUser: async function (req, res) {
+    await userModel.delete(req.params.id);
+    res.redirect('/admin/users');
+  },
   getListUser: async function (req, res) {
     const listUsers = await userModel.getAll();
     req.session.listUsers = listUsers;

@@ -10,7 +10,7 @@ module.exports = {
   },
   delete: function (id) {
     const condition = {
-      resID: id,
+      userID: id,
     };
     return db.delete(table, condition);
   },
